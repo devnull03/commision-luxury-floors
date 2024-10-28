@@ -4,12 +4,13 @@
     import { Button } from "$lib/components/ui/button";
     import { gsap } from "gsap";
     import { onMount } from "svelte";
+    import { scrollThreshold } from "$lib/animations.store";
 
     let tweens: gsap.core.Tween[] = [];
     let initScroll = 0;
 
     const handleScroll = () => {
-        if (window.scrollY < 5) {
+        if (window.scrollY < $scrollThreshold) {
             tweens.forEach((tween) => {
                 tween.play();
             });
@@ -47,13 +48,13 @@
                 href="https://instagram.com"
                 class="text-xs font-semibold uppercase"
             >
-                <Instagram color={initScroll < 5 ? "white" : "black"} />
+                <Instagram color={initScroll < $scrollThreshold ? "white" : "black"} />
             </a>
             <a href="tel:+1234567890" class="text-xs font-semibold uppercase">
-                <PhoneCall color={initScroll < 5 ? "white" : "black"} />
+                <PhoneCall color={initScroll < $scrollThreshold ? "white" : "black"} />
             </a>
 
-            <Button variant={initScroll < 5 ? "secondary" : "default"}
+            <Button variant={initScroll < $scrollThreshold ? "secondary" : "default"}
                 >Get Quote</Button
             >
         </div>

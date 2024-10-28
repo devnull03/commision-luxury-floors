@@ -3,15 +3,17 @@
     import { gsap } from "gsap";
     import Logo from "$lib/icons/logo.svelte";
     import Button from "$lib/components/ui/button/button.svelte";
+    import { scrollThreshold } from "$lib/animations.store";
 
     let initScroll = 0;
     let logoSize = 100;
     let tweenInstance: gsap.core.Tween;
+//     let $scrollThreshold = 10;
 
     const handleScroll = () => {
         // console.log(initScroll);
 
-        if (initScroll < 5) {
+        if (initScroll < $scrollThreshold) {
             tweenInstance.reverse();
         } else {
             tweenInstance.play();
@@ -54,7 +56,7 @@
 
     onMount(() => {
         tweenInstance = gsap.to("#logo", {
-            duration: 0.5,
+            duration: 0.3,
 
             width: "4rem",
             height: "4rem",
@@ -65,7 +67,7 @@
             webkitFilter: "invert(1)",
 
             ease: "power2.inOut",
-            paused: initScroll < 5,
+            paused: initScroll < $scrollThreshold,
         });
     });
 </script>
