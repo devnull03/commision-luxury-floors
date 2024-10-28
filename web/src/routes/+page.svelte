@@ -74,7 +74,7 @@
 
 <svelte:window on:scroll={handleScroll} bind:scrollY={initScroll} />
 
-<main class="w-screen flex flex-col items-center gap-8">
+<main class="w-screen flex flex-col items-center gap-8 pb-16">
     <div id="logo" class="h-[50vh] w-[50vh] fixed top-[12vh] z-50">
         <Logo />
     </div>
