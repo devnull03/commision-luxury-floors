@@ -1,146 +1,212 @@
 <script lang="ts">
-    import { onMount } from "svelte";
-    import { gsap } from "gsap";
-    import Logo from "$lib/icons/logo.svelte";
-    import Button from "$lib/components/ui/button/button.svelte";
-    import { scrollThreshold } from "$lib/animations.store";
+	import { onMount } from 'svelte';
+	import { gsap } from 'gsap';
+	import Logo from '$lib/icons/logo.svelte';
+	import Button from '$lib/components/ui/button/button.svelte';
+	import { scrollThreshold } from '$lib/animations.store';
 
-    let initScroll = $state(0);
-    let logoSize = 100;
-    let tweenInstance: gsap.core.Tween;
-//     let $scrollThreshold = 10;
+	let initScroll = $state(0);
+	let logoSize = 100;
+	let tweenInstance: gsap.core.Tween;
+	//     let $scrollThreshold = 10;
 
-    const handleScroll = () => {
-        // console.log(initScroll);
+	const handleScroll = () => {
+		// console.log(initScroll);
 
-        if (initScroll < $scrollThreshold) {
-            tweenInstance.reverse();
-        } else {
-            tweenInstance.play();
-        }
-    };
+		if (initScroll < $scrollThreshold) {
+			tweenInstance.reverse();
+		} else {
+			tweenInstance.play();
+		}
+	};
 
-    const whyPoints = [
-        {
-            title: "Resistant To Stains And Wear",
-            desc: "Long-lasting protection that keeps surfaces looking new",
-        },
-        {
-            title: "Glossy And Seamless Finish",
-            desc: "Achieve a flawless look that enhances any space",
-        },
-        {
-            title: "Custom Design And Color",
-            desc: "Achieve a flawless look that enhances any space",
-        },
-        {
-            title: "Eco-friendly Options",
-            desc: "Sustainable options for healthier and greener environment",
-        },
-    ];
+	const whyPoints = [
+		{
+			title: 'Certified Expertise by Industry Leaders',
+			desc: 'Our team is certified and trained by two renowned companies, Leggari (U.S.) and Chromology (Toronto), ensuring the highest standards of epoxy craftsmanship.'
+		},
+		{
+			title: 'Unmatched Quality & Craftsmanship',
+			desc: 'We use top-grade materials and meticulous techniques to ensure your floors are as durable as they are beautiful.'
+		},
+		{
+			title: 'Custom Design And Color',
+			desc: 'Every project is unique, tailored to meet your vision. From metallic epoxy finishes to textured coatings, our range of premium options brings style and character to your space.'
+		},
+		{
+			title: '25-Year Warranty',
+			desc: 'We stand by the longevity and durability of our floors, offering a 25-year warranty for complete peace of mind. With Luxury Floors, you’re investing in quality that lasts.'
+		},
+		{
+			title: 'Portfolio of Proven Results',
+			desc: 'With an impressive portfolio that showcases our best work, you can see firsthand how Luxury Floors transforms spaces throughout Vancouver. Browse our gallery to discover the possibilities for your next project.'
+		}
+	];
 
-    const knowMorePoints = [
-        {
-            title: "Residential Flooring",
-            desc: "For homes, featuring modern, stylish designs.",
-        },
-        {
-            title: "Custom Design",
-            desc: "High-traffic durability combined with luxury aesthetics",
-        },
-        {
-            title: "Commercial Flooring",
-            desc: "Bespoke patterns, metallic finishes for unique spaces",
-        },
-    ];
+	const knowMorePoints = [
+		{
+			title: 'Metallic Epoxy Flooring',
+			desc: 'A Durable, High-Gloss Flooring Solution with Unique Swirl Effects'
+		},
+		{
+			title: 'Flake Epoxy Flooring',
+			desc: 'A Slip-Resistant, Textured Flooring with Customizable Colors and Patterns'
+		},
+		{
+			title: 'Epoxy Counter-tops',
+			desc: 'A Seamless, High-Gloss Surface with Exceptional Durability and Style'
+		},
+		{
+			title: 'Texture Deck',
+			desc: 'Enhance Your Deck with a Slip-Resistant, Durable, and Stylish Finish'
+		},
+		{
+			title: 'Concrete repair',
+			desc: 'Restore and Strengthen Your Surfaces with Lasting Solutions'
+		},
+		{
+			title: 'Asphalt repair',
+			desc: 'Revitalize and Protect Your Pavement with Durable Restoration Solutions'
+		},
+		{
+			title: 'Concrete Wall',
+			desc: 'Enhance Your Deck with a Slip-Resistant, Durable, and Stylish Finish'
+		}
+	];
 
-    onMount(() => {
-        tweenInstance = gsap.to("#logo", {
-            duration: 0.3,
+	const testimonials = [
+		{
+			author: 'Sarah L.',
+			testimonial:
+				"I couldn't be happier with my new metallic epoxy floor! Luxury Floors transformed my basement into a stunning space that looks like a high-end showroom. The team was professional, detail-oriented, and delivered exactly what they promised. Highly recommend them for anyone looking for premium flooring solutions."
+		},
+		{
+			author: 'David R.',
+			testimonial:
+				'We hired Luxury Floors to upgrade our retail store, and the results were beyond our expectations. The flake epoxy floor not only looks fantastic but is also incredibly durable and easy to clean. Our customers constantly compliment the sleek and modern design.'
+		},
+		{
+			author: 'Jessica R.',
+			testimonial:
+				"Luxury Floors lives up to its name! Their custom metallic floor has completely transformed the look of our home's entryway. The installation process was smooth, and the team was very knowledgeable, answering all our questions. A five-star experience."
+		},
+		{
+			author: 'James P.',
+			testimonial:
+				"Our garage floor was in bad shape, and we needed something durable yet attractive. Luxury Floors installed a flake epoxy floor that's both tough and beautiful. It's perfect for heavy use and adds so much value to our property. Thank you for the amazing work."
+		},
+		{
+			author: 'Andrew S.',
+			testimonial: 'Top-notch service and quality. My floors look amazing!'
+		},
+		{
+			author: 'Amrit B.',
+			testimonial:
+				"Luxury Floors exceeded our expectations with their exceptional craftsmanship and attention to detail. The custom metallic epoxy floor they installed in our living room is a true work of art. It's durable, easy to maintain, and adds a unique touch of elegance to our home. We've already recommended them to friends and family."
+		}
+	];
 
-            width: "4rem",
-            height: "4rem",
+	onMount(() => {
+		tweenInstance = gsap.to('#logo', {
+			duration: 0.3,
 
-            top: "1rem",
-            left: "16%",
-            filter: "invert(1)",
-            webkitFilter: "invert(1)",
+			width: '4rem',
+			height: '4rem',
 
-            ease: "power2.inOut",
-            paused: initScroll < $scrollThreshold,
-        });
-    });
+			top: '1rem',
+			left: '16%',
+			filter: 'invert(1)',
+			webkitFilter: 'invert(1)',
+
+			ease: 'power2.inOut',
+			paused: initScroll < $scrollThreshold
+		});
+	});
 </script>
 
 <svelte:window onscroll={handleScroll} bind:scrollY={initScroll} />
 
-<main class="w-screen flex flex-col items-center gap-8 pb-16">
-    <div id="logo" class="h-[50vh] w-[50vh] fixed top-[12vh] z-50">
-        <Logo />
-    </div>
+<main class="flex w-screen flex-col items-center gap-8 pb-16">
+	<div id="logo" class="fixed top-[12vh] z-50 h-[50vh] w-[50vh]">
+		<Logo />
+	</div>
 
-    <div class="relative flex flex-row justify-evenly gap-0 w-full h-[80vh]">
-        {#each Array(4) as _, i}
-            <img
-                src="/floor{i + 1}.png"
-                class="w-1/4 object-cover object-left"
-                alt=""
-            />
-        {/each}
+	<section class="relative flex h-[80vh] w-full flex-row justify-evenly gap-0">
+		{#each Array(4) as _, i}
+			<img src="/landing/floor{i + 1}.png" class="w-1/4 object-cover object-left" alt="" />
+		{/each}
 
-        <div class="absolute bottom-16 flex flex-col items-center gap-8">
+		<!-- <div class="absolute bottom-16 flex flex-col items-center gap-8">
             <p class=" text-white text-xl leading-8 text-center font-[Alatsi]">
                 Premium, seamless, and durable floors for modern homes <br /> and
                 commercial spaces.
             </p>
 
             <Button variant="secondary">Explore Designs</Button>
-        </div>
-    </div>
+        </div> -->
+	</section>
 
-    <div
-        class="px-[16%] py-16 flex flex-col gap-16 w-full items-center font-[Alatsi]"
-    >
-        <h1 class="text-2xl leading-10">Why Epoxy Flooring ?</h1>
-        <div
-            class="w-full grid grid-flow-row-dense grid-rows-2 grid-cols-4 gap-16"
-        >
-            <div class="col-span-2 row-span-2 overflow-hidden">
-                <img
-                    src="/tiles.jpeg"
-                    alt=""
-                    class="object-cover h-full hover:scale-110 transition-all ease-in-out duration-500"
-                />
-            </div>
+	<section class="flex w-full flex-col items-center gap-16 px-[6%] pt-16 font-[Alatsi]">
+		<h1 class="text-2xl leading-10">Why Luxury Flooring ?</h1>
 
-            {#each whyPoints as point, i}
-                <div class="flex flex-row items-center font-[Alatsi] gap-2">
-                    <span class="text-[9rem] leading-[50%]">{i + 1}</span>
-                    <span>
-                        {point.title} <br />
-                        <span class="font-[Cantarell]">{point.desc}</span>
-                    </span>
-                </div>
-            {/each}
-        </div>
-    </div>
+		<div class="grid w-full grid-flow-row-dense grid-cols-6 grid-rows-3">
+			<div class="col-span-6 flex w-full items-center justify-center">
+				<div class="w-1/2 overflow-hidden rounded-3xl">
+					<img
+						src="/landing/tiles.jpeg"
+						alt=""
+						class="object-cover transition-all duration-500 ease-in-out hover:scale-110"
+					/>
+				</div>
+			</div>
 
-    <div class="px-[16%] py-16 w-full grid grid-cols-3 gap-10">
-        {#each knowMorePoints as point, i}
-            <div class="flex flex-col items-center gap-4 text-center">
-                <div class="overflow-hidden rounded-sm">
-                    <img
-                        src="/more{i + 1}.jpeg"
-                        class="object-cover aspect-square hover:scale-110 transition-all ease-in-out duration-500"
-                        alt=""
-                    />
-                </div>
+			{#each whyPoints as point, i}
+				<div
+					class="flex flex-row gap-2 font-[Alatsi] {i <= 2
+						? 'col-span-2 items-center'
+						: 'col-span-3 px-[15%]'}"
+				>
+					<span class="text-[9rem] leading-[50%]">{i + 1}</span>
+					<span>
+						{point.title} <br />
+						<span class="font-[Cantarell]">{point.desc}</span>
+					</span>
+				</div>
+			{/each}
+		</div>
+	</section>
 
-                <span class="font-[Alatsi] text-xl"> {point.title}</span>
-                <span class="font-[Cantarell] text-[#00000099]"
-                    >{point.desc}</span
-                >
-            </div>
-        {/each}
-    </div>
+	<section class="flex flex-col items-center gap-16 px-[6%] pb-16">
+		<h1 class="text-center text-4xl font-semibold leading-10">Services</h1>
+
+		<div class="grid w-full grid-cols-3 gap-10">
+			{#each knowMorePoints as point, i}
+				<div class="flex flex-col items-center gap-4 text-center">
+					<div class=" aspect-square overflow-hidden rounded-3xl object-cover">
+						<img
+							src="/landing/more{i + 1}.jpeg"
+							class="h-full w-full object-cover transition-all duration-500 ease-in-out hover:scale-110"
+							alt=""
+						/>
+					</div>
+
+					<span class="font-[Alatsi] text-xl"> {point.title}</span>
+					<span class="font-[Cantarell] text-[#00000099]">{point.desc}</span>
+				</div>
+			{/each}
+		</div>
+	</section>
+
+	<section class="flex flex-col items-center gap-16 px-[6%] pb-16">
+		<h1 class="text-center text-4xl font-semibold leading-10">Testimonials</h1>
+
+		<div class="grid w-full grid-cols-3 gap-10">
+			{#each testimonials as item, i}
+
+			
+
+
+			{/each}
+		</div>
+	</section>
 </main>
