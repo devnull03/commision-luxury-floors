@@ -4,15 +4,14 @@
 	import Logo from '$lib/icons/logo.svelte';
 	import Button from '$lib/components/ui/button/button.svelte';
 	import { scrollThreshold } from '$lib/animations.store';
+	import { ScrollArea } from '$lib/components/ui/scroll-area';
+	import * as Card from '$lib/components/ui/card';
 
 	let initScroll = $state(0);
 	let logoSize = 100;
 	let tweenInstance: gsap.core.Tween;
-	//     let $scrollThreshold = 10;
 
 	const handleScroll = () => {
-		// console.log(initScroll);
-
 		if (initScroll < $scrollThreshold) {
 			tweenInstance.reverse();
 		} else {
@@ -60,14 +59,14 @@
 			title: 'Texture Deck',
 			desc: 'Enhance Your Deck with a Slip-Resistant, Durable, and Stylish Finish'
 		},
-		{
-			title: 'Concrete repair',
-			desc: 'Restore and Strengthen Your Surfaces with Lasting Solutions'
-		},
-		{
-			title: 'Asphalt repair',
-			desc: 'Revitalize and Protect Your Pavement with Durable Restoration Solutions'
-		},
+		// {
+		// 	title: 'Concrete repair',
+		// 	desc: 'Restore and Strengthen Your Surfaces with Lasting Solutions'
+		// },
+		// {
+		// 	title: 'Asphalt repair',
+		// 	desc: 'Revitalize and Protect Your Pavement with Durable Restoration Solutions'
+		// },
 		{
 			title: 'Concrete Wall',
 			desc: 'Enhance Your Deck with a Slip-Resistant, Durable, and Stylish Finish'
@@ -114,7 +113,7 @@
 			height: '4rem',
 
 			top: '1rem',
-			left: '16%',
+			left: '6%',
 			filter: 'invert(1)',
 			webkitFilter: 'invert(1)',
 
@@ -126,16 +125,18 @@
 
 <svelte:window onscroll={handleScroll} bind:scrollY={initScroll} />
 
-<main class="flex w-screen flex-col items-center gap-8 pb-16">
+<main class="flex w-screen flex-col items-center gap-8 pb-56">
 	<div id="logo" class="fixed top-[12vh] z-50 h-[50vh] w-[50vh]">
 		<Logo />
 	</div>
 
+	<!-- landing screen -->
 	<section class="relative flex h-[80vh] w-full flex-row justify-evenly gap-0">
 		{#each Array(4) as _, i}
 			<img src="/landing/floor{i + 1}.png" class="w-1/4 object-cover object-left" alt="" />
 		{/each}
 
+		<!-- TODO: create the thingy after scroll landing page -->
 		<!-- <div class="absolute bottom-16 flex flex-col items-center gap-8">
             <p class=" text-white text-xl leading-8 text-center font-[Alatsi]">
                 Premium, seamless, and durable floors for modern homes <br /> and
@@ -146,6 +147,7 @@
         </div> -->
 	</section>
 
+	<!-- know more why -->
 	<section class="flex w-full flex-col items-center gap-16 px-[6%] pt-16 font-[Alatsi]">
 		<h1 class="text-2xl leading-10">Why Luxury Flooring ?</h1>
 
@@ -176,6 +178,7 @@
 		</div>
 	</section>
 
+	<!-- services -->
 	<section class="flex flex-col items-center gap-16 px-[6%] pb-16">
 		<h1 class="text-center text-4xl font-semibold leading-10">Services</h1>
 
@@ -197,16 +200,29 @@
 		</div>
 	</section>
 
-	<section class="flex flex-col items-center gap-16 px-[6%] pb-16">
+	<!-- testimonials -->
+	<section class="flex w-full flex-col gap-16 pb-16 text-center">
 		<h1 class="text-center text-4xl font-semibold leading-10">Testimonials</h1>
 
-		<div class="grid w-full grid-cols-3 gap-10">
-			{#each testimonials as item, i}
-
-			
-
-
-			{/each}
-		</div>
+		<ScrollArea orientation="horizontal" class="w-full">
+			<div class="flex flex-row gap-8 px-[30vw] pb-4">
+				{#each testimonials as item, idx (idx)}
+					<Card.Root class="h-[65vh] w-[30vw] bg-black">
+						<Card.Header>
+							<img src="/quote.png" class="aspect-square w-16" alt="" />
+						</Card.Header>
+						<Card.Content>
+							<!-- <ScrollArea> -->
+							<div class="text-left text-xl font-semibold text-[#FFFFFFCC]">
+								{item.testimonial}
+								<br />
+								<span class="text-[#C7A865]">{item.author}</span>
+							</div>
+							<!-- </ScrollArea> -->
+						</Card.Content>
+					</Card.Root>
+				{/each}
+			</div>
+		</ScrollArea>
 	</section>
 </main>
