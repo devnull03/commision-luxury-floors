@@ -9,21 +9,12 @@
 	import { Title } from './components/ui/card';
 	import { Slider } from './components/ui/slider';
 	import { Input } from './components/ui/input';
+	import { goto } from '$app/navigation';
+	import { page } from '$app/stores';
+	import Logo from './icons/logo.svelte';
 
-	let tweens: gsap.core.Tween[] = [];
 	let initScroll = $state(0);
-
-	const handleScroll = () => {
-		if (window.scrollY < $scrollThreshold) {
-			tweens.forEach((tween) => {
-				tween.play();
-			});
-		} else {
-			tweens.forEach((tween) => {
-				tween.reverse();
-			});
-		}
-	};
+	let isLandingPage = $derived($page.route.id === '/');
 
 	let quoteArea = $state([0]);
 	let quoteEpoxyType = $state<'Metalic' | 'Flake'>('Metalic');
@@ -36,35 +27,44 @@
 	onMount(() => {});
 </script>
 
-<svelte:window onscroll={handleScroll} bind:scrollY={initScroll} />
+<svelte:window bind:scrollY={initScroll} />
 
 <nav class="">
+	{#if !isLandingPage}
+		<div class="fixed left-[6%] top-4 z-[999] aspect-square h-16 w-16 invert">
+			<Logo />
+		</div>
+	{/if}
+
 	<div
-		class="fixed top-0 z-50 flex h-24 w-full flex-row justify-between px-[6%] {initScroll < 5
+		class="fixed top-0 z-50 flex h-24 w-full flex-row justify-between px-[6%] {initScroll <
+			$scrollThreshold && isLandingPage
 			? 'bg-transparent'
 			: 'bg-white'} transition-all duration-500 ease-in-out"
 	>
-		<div
-			class="flex items-center pl-20 font-[Cantarell] text-2xl {initScroll < 5
+		<button
+			class="flex items-center pl-20 font-[Cantarell] text-2xl {initScroll < $scrollThreshold &&
+			isLandingPage
 				? 'text-transparent'
 				: 'text-[#00000080]'}"
 			id="header-logo-area"
+			onclick={() => goto('/')}
 		>
 			Luxry Floors
-		</div>
+		</button>
 
 		<div class="flex flex-row items-center justify-evenly gap-8">
 			<a href="https://instagram.com" class="text-xs font-semibold uppercase">
-				<Instagram color={initScroll < $scrollThreshold ? 'white' : 'black'} />
+				<Instagram color={initScroll < $scrollThreshold && isLandingPage ? 'white' : 'black'} />
 			</a>
 			<a href="tel:+1234567890" class="text-xs font-semibold uppercase">
-				<PhoneCall color={initScroll < $scrollThreshold ? 'white' : 'black'} />
+				<PhoneCall color={initScroll < $scrollThreshold && isLandingPage ? 'white' : 'black'} />
 			</a>
 
 			<Dialog.Root>
 				<Dialog.Trigger
 					class={buttonVariants({
-						variant: initScroll < $scrollThreshold ? 'secondary' : 'default'
+						variant: initScroll < $scrollThreshold && isLandingPage ? 'secondary' : 'default'
 					})}
 				>
 					Get Quote
