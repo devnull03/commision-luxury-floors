@@ -28,11 +28,10 @@
 	let quoteArea = $state([0]);
 	let quoteEpoxyType = $state<'Metalic' | 'Flake'>('Metalic');
 	let quoteTotal = $derived(() => {
+		// TODO: add quote formula
 		let epoxyMultiplier = quoteEpoxyType === 'Metalic' ? 10 : 5;
-
 		return quoteArea[0] * epoxyMultiplier;
 	});
-	$inspect(quoteArea);
 
 	onMount(() => {});
 </script>
@@ -62,7 +61,7 @@
 				<PhoneCall color={initScroll < $scrollThreshold ? 'white' : 'black'} />
 			</a>
 
-			<Dialog.Root open={true}>
+			<Dialog.Root>
 				<Dialog.Trigger
 					class={buttonVariants({
 						variant: initScroll < $scrollThreshold ? 'secondary' : 'default'
@@ -107,6 +106,7 @@
 
 						<!-- custom quote -->
 						<div class="flex h-full w-1/2 flex-col items-center justify-center gap-4 *:max-w-[70%]">
+							<!-- TODO: add staticforms functionality -->
 							<h6 class="flex items-end text-lg font-semibold">Custom Design</h6>
 							<Input type="text" placeholder="Name" />
 							<Input type="email" placeholder="Email" />

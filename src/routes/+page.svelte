@@ -6,6 +6,7 @@
 	import { scrollThreshold } from '$lib/animations.store';
 	import { ScrollArea } from '$lib/components/ui/scroll-area';
 	import * as Card from '$lib/components/ui/card';
+	import { fade } from 'svelte/transition';
 
 	let initScroll = $state(0);
 	let logoSize = 100;
@@ -125,7 +126,7 @@
 
 <svelte:window onscroll={handleScroll} bind:scrollY={initScroll} />
 
-<main class="flex w-screen flex-col items-center gap-8 pb-56">
+<main class="flex w-screen flex-col items-center gap-8 pb-48">
 	<div id="logo" class="fixed top-[12vh] z-50 h-[50vh] w-[50vh]">
 		<Logo />
 	</div>
@@ -136,15 +137,19 @@
 			<img src="/landing/floor{i + 1}.png" class="w-1/4 object-cover object-left" alt="" />
 		{/each}
 
-		<!-- TODO: create the thingy after scroll landing page -->
-		<!-- <div class="absolute bottom-16 flex flex-col items-center gap-8">
-            <p class=" text-white text-xl leading-8 text-center font-[Alatsi]">
-                Premium, seamless, and durable floors for modern homes <br /> and
-                commercial spaces.
-            </p>
-
-            <Button variant="secondary">Explore Designs</Button>
-        </div> -->
+		{#if initScroll > $scrollThreshold}
+			<div
+				transition:fade={{ duration: 300 }}
+				class="absolute left-1/2 top-1/2 flex w-full -translate-x-1/2 -translate-y-1/2 transform flex-col items-center"
+			>
+				<h1 class="text-shadow text-center text-[10vw] font-semibold text-white">Luxury Floors</h1>
+				<p class="text-center font-[Cantarell] text-2xl text-white">
+					Premium, seamless, and durable floors for modern homes and commercial spaces.
+				</p>
+				<!-- TODO: make portfoio button do something  -->
+				<Button variant="outline" class="mt-8 uppercase">Portfolio</Button>
+			</div>
+		{/if}
 	</section>
 
 	<!-- know more why -->
@@ -226,3 +231,9 @@
 		</ScrollArea>
 	</section>
 </main>
+
+<style>
+	.text-shadow {
+		text-shadow: 2px 3px 9px rgba(0, 0, 0, 0.59);
+	}
+</style>
