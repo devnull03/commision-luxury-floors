@@ -4,7 +4,7 @@
 	import { serviceData } from '$lib/stores.svelte';
 	import * as Carousel from '$lib/components/ui/carousel';
 
-	let selectedServiceData = $derived(serviceData[$page.params.id] || {});
+	let selectedServiceData = $derived(serviceData[$page.params.id]);
 	$inspect(selectedServiceData);
 
 	$effect(() => {
@@ -35,7 +35,7 @@
 		<div class="grid w-full grid-cols-3 grid-rows-2">
 			{#each selectedServiceData.applications as application, idx}
 				<figure class="flex aspect-square flex-col items-center justify-center gap-4">
-					<img src="/{$page.params.id}/applications/{idx}.png" alt="" class="w-[15vw]" />
+					<img src="/{$page.params.id}/applications/{idx}.png" alt="" class="w-[10vw]" />
 					<figcaption class="text-sm">{application}</figcaption>
 				</figure>
 			{/each}

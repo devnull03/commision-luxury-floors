@@ -70,7 +70,7 @@
 		// 	desc: 'Revitalize and Protect Your Pavement with Durable Restoration Solutions'
 		// },
 		{
-			title: 'Concrete Wall',
+			title: 'Concrete Walls',
 			desc: 'Enhance Your Deck with a Slip-Resistant, Durable, and Stylish Finish'
 		}
 	];
@@ -147,7 +147,6 @@
 				<p class="text-center font-[Cantarell] text-2xl text-white">
 					Premium, seamless, and durable floors for modern homes and commercial spaces.
 				</p>
-				<!-- TODO: make portfoio button do something  -->
 				<Button onclick={() => goto('/services')} variant="outline" class="mt-8 uppercase"
 					>Portfolio</Button
 				>
