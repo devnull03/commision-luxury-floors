@@ -7,6 +7,7 @@
 	import { ScrollArea } from '$lib/components/ui/scroll-area';
 	import * as Card from '$lib/components/ui/card';
 	import { fade } from 'svelte/transition';
+	import { goto } from '$app/navigation';
 
 	let initScroll = $state(0);
 	let logoSize = 100;
@@ -147,7 +148,7 @@
 					Premium, seamless, and durable floors for modern homes and commercial spaces.
 				</p>
 				<!-- TODO: make portfoio button do something  -->
-				<Button variant="outline" class="mt-8 uppercase">Portfolio</Button>
+				<Button onclick={() => goto("/portfolio")} variant="outline" class="mt-8 uppercase">Portfolio</Button>
 			</div>
 		{/if}
 	</section>
