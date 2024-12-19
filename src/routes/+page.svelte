@@ -195,7 +195,7 @@
 				{@const section = point.title.toLowerCase().replaceAll(' ', '-')}
 				<div class="flex flex-col items-center gap-4 text-center">
 					<button
-						onclick={() => goto('/services/{section}')}
+						onclick={() => goto(`/services/${section}`)}
 						class=" aspect-square overflow-hidden rounded-3xl object-cover"
 					>
 						<img

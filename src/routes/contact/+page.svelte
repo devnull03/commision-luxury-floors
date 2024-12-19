@@ -4,10 +4,10 @@
 
     let { form } = $props();
 
-    let name: string = $state();
-    let email: string = $state();
-    let phone: string = $state();
-    let message: string = $state();
+    let name: string = $state("");
+    let email: string = $state("");
+    let phone: string = $state("");
+    let message: string = $state("");
 
 </script>
 

@@ -36,13 +36,13 @@
 		<Tooltip.Trigger
 			onclick={() => {
 				dialogOpen = true;
-				dialogImageSrc = `/portfolio/${section}/${idx}.jpg`;
+				dialogImageSrc = `/${section}/portfolio/${idx}.jpg`;
 			}}
 			class="overflow-hidden object-cover {gridCtrl}"
 		>
 			<img
 				loading="lazy"
-				src="/portfolio/{section}/{idx}.jpg"
+				src="/{section}/portfolio/{idx}.jpg"
 				alt=""
 				class="h-full w-full object-cover transition-all duration-500 ease-in-out hover:scale-110"
 			/>
@@ -54,7 +54,7 @@
 	</Tooltip.Root>
 {/snippet}
 
-<main class="mt-24 flex h-full flex-col gap-16 p-[6vw] font-[Cantarell]">
+<main class="mt-16 flex h-full flex-col gap-16 p-[6vw] font-[Cantarell]">
 	<h1 class="text-center text-3xl font-semibold">Portfolio</h1>
 
 	{#each services as section}
