@@ -1,17 +1,17 @@
 <script lang="ts">
-	import Instagram from './icons/Instagram.svelte';
-	import PhoneCall from './icons/PhoneCall.svelte';
+	import Instagram from '../icons/Instagram.svelte';
+	import PhoneCall from '../icons/PhoneCall.svelte';
 	import { Button, buttonVariants } from '$lib/components/ui/button';
 	import { gsap } from 'gsap';
 	import { onMount } from 'svelte';
 	import { scrollThreshold } from '$lib/animations.store';
 	import * as Dialog from '$lib/components/ui/dialog';
-	import { Title } from './components/ui/card';
-	import { Slider } from './components/ui/slider';
-	import { Input } from './components/ui/input';
+	import { Title } from './ui/card';
+	import { Slider } from './ui/slider';
+	import { Input } from './ui/input';
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
-	import Logo from './icons/logo.svelte';
+	import Logo from '../icons/logo.svelte';
 
 	let initScroll = $state(0);
 	let isLandingPage = $derived($page.route.id === '/');
@@ -54,6 +54,14 @@
 		</button>
 
 		<div class="flex flex-row items-center justify-evenly gap-8">
+
+			<a
+				href="/services"
+				class="{initScroll < $scrollThreshold && isLandingPage
+					? 'text-white'
+					: 'text-black'} font-semibold">Services</a
+			>
+
 			<a href="https://instagram.com" class="text-xs font-semibold uppercase">
 				<Instagram color={initScroll < $scrollThreshold && isLandingPage ? 'white' : 'black'} />
 			</a>

@@ -75,4 +75,8 @@
   body {
     @apply bg-background text-foreground;
   }
+
+  .foot-logo {
+		filter: invert(67%) sepia(9%) saturate(1858%) hue-rotate(3deg) brightness(200%) contrast(88%);
+	}
 }

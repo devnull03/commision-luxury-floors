@@ -148,7 +148,7 @@
 					Premium, seamless, and durable floors for modern homes and commercial spaces.
 				</p>
 				<!-- TODO: make portfoio button do something  -->
-				<Button onclick={() => goto("/portfolio")} variant="outline" class="mt-8 uppercase">Portfolio</Button>
+				<Button onclick={() => goto("/services")} variant="outline" class="mt-8 uppercase">Portfolio</Button>
 			</div>
 		{/if}
 	</section>

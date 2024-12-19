@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { PUBLIC_COMPANY_NAME, PUBLIC_DOMAIN } from '$env/static/public';
-	import Logo from './icons/logo.svelte';
+	import Logo from '$lib/icons/logo.svelte';
 
 	const menuItems = [
 		{ label: 'OUR STORY', route: '/our-story' },
@@ -49,9 +49,3 @@
 		</p>
 	</div>
 </footer>
-
-<style type="postcss">
-	.foot-logo {
-		filter: invert(67%) sepia(9%) saturate(1858%) hue-rotate(3deg) brightness(200%) contrast(88%);
-	}
-</style>
