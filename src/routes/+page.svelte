@@ -54,7 +54,7 @@
 			desc: 'A Slip-Resistant, Textured Flooring with Customizable Colors and Patterns'
 		},
 		{
-			title: 'Epoxy Counter-tops',
+			title: 'Epoxy Countertops',
 			desc: 'A Seamless, High-Gloss Surface with Exceptional Durability and Style'
 		},
 		{
@@ -148,7 +148,9 @@
 					Premium, seamless, and durable floors for modern homes and commercial spaces.
 				</p>
 				<!-- TODO: make portfoio button do something  -->
-				<Button onclick={() => goto("/services")} variant="outline" class="mt-8 uppercase">Portfolio</Button>
+				<Button onclick={() => goto('/services')} variant="outline" class="mt-8 uppercase"
+					>Portfolio</Button
+				>
 			</div>
 		{/if}
 	</section>
@@ -190,17 +192,26 @@
 
 		<div class="grid w-full grid-cols-3 gap-10">
 			{#each knowMorePoints as point, i}
+				{@const section = point.title.toLowerCase().replaceAll(' ', '-')}
 				<div class="flex flex-col items-center gap-4 text-center">
-					<div class=" aspect-square overflow-hidden rounded-3xl object-cover">
+					<button
+						onclick={() => goto('/services/{section}')}
+						class=" aspect-square overflow-hidden rounded-3xl object-cover"
+					>
 						<img
 							src="/landing/more{i + 1}.jpeg"
 							class="h-full w-full object-cover transition-all duration-500 ease-in-out hover:scale-110"
 							alt=""
 						/>
-					</div>
+					</button>
 
 					<span class="font-[Alatsi] text-xl"> {point.title}</span>
 					<span class="font-[Cantarell] text-[#00000099]">{point.desc}</span>
+					<a
+						href="/services/{section}"
+						class="border-b border-b-transparent text-xs italic transition-all duration-300 ease-in-out hover:border-b-black"
+						>Read more...</a
+					>
 				</div>
 			{/each}
 		</div>

@@ -4,15 +4,16 @@
 	import * as Dialog from '$lib/components/ui/dialog';
 	import { ScrollArea } from '$lib/components/ui/scroll-area';
 	import * as Tooltip from '$lib/components/ui/tooltip/index.js';
+	import { services } from '$lib/stores.svelte';
 
 	const sectionImageCount = 7;
-	const sections = [
-		'metalic-epoxy-floors',
-		'flake-epoxy-floors',
-		'epoxy-countertops',
-		'texture-deck',
-		'concrete-walls'
-	];
+	// const $services = [
+	// 	'metalic-epoxy-floors',
+	// 	'flake-epoxy-floors',
+	// 	'epoxy-countertops',
+	// 	'texture-deck',
+	// 	'concrete-walls'
+	// ];
 
 	let dialogOpen = $state(false);
 	let dialogImageSrc = $state('');
@@ -56,11 +57,16 @@
 <main class="mt-24 flex h-full flex-col gap-16 p-[6vw] font-[Cantarell]">
 	<h1 class="text-center text-3xl font-semibold">Portfolio</h1>
 
-	{#each sections as section}
+	{#each services as section}
 		{@const sectionTitle = section.replaceAll('-', ' ')}
 		<section class="">
-			<h5 class="mb-4 text-lg">
+			<h5 class="mb-4 flex items-baseline justify-between text-xl">
 				{sectionTitle[0].toUpperCase() + sectionTitle.slice(1)}
+				<a
+					href="/services/{section}"
+					class="text-xs italic transition-all duration-300 ease-in-out hover:border-b hover:border-b-black"
+					>Read more...</a
+				>
 			</h5>
 
 			<div class="grid h-[130vh] grid-cols-7 grid-rows-3 gap-8 overflow-clip">
