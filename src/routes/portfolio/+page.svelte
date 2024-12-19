@@ -1,7 +1,9 @@
 <script lang="ts">
 	import { PUBLIC_COMPANY_NAME } from '$env/static/public';
+	import { Button } from '$lib/components/ui/button';
 	import * as Dialog from '$lib/components/ui/dialog';
 	import { ScrollArea } from '$lib/components/ui/scroll-area';
+	import * as Tooltip from '$lib/components/ui/tooltip/index.js';
 
 	const sectionImageCount = 7;
 	const sections = [
@@ -29,19 +31,25 @@
 </Dialog.Root>
 
 {#snippet sectionFigure(gridCtrl: string, section: string, idx: number)}
-	<button
-		onclick={() => {
-			dialogOpen = true;
-			dialogImageSrc = `/portfolio/${section}/${idx}.jpg`;
-		}}
-		class="overflow-hidden object-cover {gridCtrl}"
-	>
-		<img
-			src="/portfolio/{section}/{idx}.jpg"
-			alt=""
-			class="h-full w-full object-cover transition-all duration-500 ease-in-out hover:scale-110"
-		/>
-	</button>
+	<Tooltip.Root openDelay={300}>
+		<Tooltip.Trigger
+			onclick={() => {
+				dialogOpen = true;
+				dialogImageSrc = `/portfolio/${section}/${idx}.jpg`;
+			}}
+			class="overflow-hidden object-cover {gridCtrl}"
+		>
+			<img
+				src="/portfolio/{section}/{idx}.jpg"
+				alt=""
+				class="h-full w-full object-cover transition-all duration-500 ease-in-out hover:scale-110"
+			/>
+		</Tooltip.Trigger>
+
+		<Tooltip.Content>
+			<span>Click to expand</span>
+		</Tooltip.Content>
+	</Tooltip.Root>
 {/snippet}
 
 <main class="mt-24 flex h-full flex-col gap-16 p-[6vw] font-[Cantarell]">
