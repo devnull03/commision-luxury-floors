@@ -40,6 +40,7 @@
 			class="overflow-hidden object-cover {gridCtrl}"
 		>
 			<img
+				loading="lazy"
 				src="/portfolio/{section}/{idx}.jpg"
 				alt=""
 				class="h-full w-full object-cover transition-all duration-500 ease-in-out hover:scale-110"

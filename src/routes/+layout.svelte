@@ -2,14 +2,23 @@
 	import { PUBLIC_COMPANY_NAME } from '$env/static/public';
 	import Footer from '$lib/Footer.svelte';
 	import Header from '$lib/Header.svelte';
-	import { fade } from 'svelte/transition';
+	import { fade, fly } from 'svelte/transition';
 	import '../app.css';
+	import { navigating } from '$app/stores';
+	import { onMount } from 'svelte';
 	interface Props {
 		children?: import('svelte').Snippet;
 	}
 
 	let scrollY = $state(0);
 	let { children }: Props = $props();
+
+	let firstLoad = $state(true);
+	let load = $derived(firstLoad || !$navigating);
+
+	onMount(() => {
+		firstLoad = false;
+	});
 </script>
 
 <svelte:head>
@@ -25,13 +34,15 @@
 
 <svelte:window bind:scrollY />
 
-<div class="flex h-screen flex-col justify-between">
-	<Header />
-	<main class="">
-		{@render children?.()}
-	</main>
-	<Footer />
-</div>
+{#key load}
+	<div in:fade={{ duration: 400 }} class="flex h-screen flex-col justify-between">
+		<Header />
+		<main class="">
+			{@render children?.()}
+		</main>
+		<Footer />
+	</div>
+{/key}
 
 {#if scrollY !== 0}
 	<button
