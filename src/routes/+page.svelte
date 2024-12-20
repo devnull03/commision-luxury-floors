@@ -8,10 +8,12 @@
 	import * as Card from '$lib/components/ui/card';
 	import { fade } from 'svelte/transition';
 	import { goto } from '$app/navigation';
+	import { page } from '$app/stores';
+	import { services } from '$lib/stores.svelte';
 
 	let initScroll = $state(0);
-	let logoSize = 100;
 	let tweenInstance: gsap.core.Tween;
+	let servicesSection: HTMLElement;
 
 	const handleScroll = () => {
 		if (initScroll < $scrollThreshold) {
@@ -122,13 +124,17 @@
 			ease: 'power2.inOut',
 			paused: initScroll < $scrollThreshold
 		});
+
+		if ($page.url.searchParams.has('services') && servicesSection) {
+			servicesSection.scrollIntoView({ behavior: 'smooth' });
+		}
 	});
 </script>
 
 <svelte:window onscroll={handleScroll} bind:scrollY={initScroll} />
 
 <main class="flex w-screen flex-col items-center gap-8 pb-48">
-	<div id="logo" class="fixed top-[12vh] z-50 h-[50vh] w-[50vh] aspect-square">
+	<div id="logo" class="fixed top-[12vh] z-50 aspect-square h-[50vh] w-[50vh]">
 		<Logo />
 	</div>
 
@@ -149,8 +155,10 @@
 				</p>
 			</div>
 		{/if}
-		<Button onclick={() => goto('/gallery')} variant="outline" class="mt-8 uppercase absolute bottom-[15%] "
-			>Portfolio</Button
+		<Button
+			onclick={() => goto('/gallery')}
+			variant="outline"
+			class="absolute bottom-[15%] mt-8 uppercase ">Portfolio</Button
 		>
 	</section>
 
@@ -186,15 +194,19 @@
 	</section>
 
 	<!-- services -->
-	<section class="flex flex-col items-center gap-16 px-[6%] pb-16" id="services">
+	<section
+		class="flex scroll-mt-32 flex-col items-center gap-16 px-[6%] pb-16"
+		id="services"
+		bind:this={servicesSection}
+	>
 		<h1 class="text-center text-4xl font-semibold leading-10">Services</h1>
 
 		<div class="grid w-full grid-cols-3 gap-10">
 			{#each knowMorePoints as point, i}
-				{@const section = point.title.toLowerCase().replaceAll(' ', '-')}
+				<!-- {@const section = point.title.toLowerCase().replaceAll(' ', '-')} -->
 				<div class="flex flex-col items-center gap-4 text-center">
 					<button
-						onclick={() => goto(`/services/${section}`)}
+						onclick={() => goto(`/services/${services[i]}`)}
 						class=" aspect-square overflow-hidden rounded-3xl object-cover"
 					>
 						<img
@@ -207,7 +219,7 @@
 					<span class="font-[Alatsi] text-xl"> {point.title}</span>
 					<span class="font-[Cantarell] text-[#00000099]">{point.desc}</span>
 					<a
-						href="/services/{section}"
+						href="/services/{services[i]}"
 						class="border-b border-b-transparent text-xs italic transition-all duration-300 ease-in-out hover:border-b-black"
 						>Read more...</a
 					>
@@ -223,7 +235,7 @@
 		<ScrollArea orientation="horizontal" class="w-full">
 			<div class="flex flex-row gap-8 px-[30vw] pb-4">
 				{#each testimonials as item, idx (idx)}
-					<Card.Root class="h-[65vh] w-[30vw] bg-black">
+					<Card.Root class="min-h-[65vh] w-[30vw] bg-black">
 						<Card.Header>
 							<img src="/quote.png" class="aspect-square w-16" alt="" />
 						</Card.Header>
