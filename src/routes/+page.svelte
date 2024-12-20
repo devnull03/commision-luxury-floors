@@ -128,7 +128,7 @@
 <svelte:window onscroll={handleScroll} bind:scrollY={initScroll} />
 
 <main class="flex w-screen flex-col items-center gap-8 pb-48">
-	<div id="logo" class="fixed top-[12vh] z-50 h-[50vh] w-[50vh]">
+	<div id="logo" class="fixed top-[12vh] z-50 h-[50vh] w-[50vh] aspect-square">
 		<Logo />
 	</div>
 
@@ -147,11 +147,11 @@
 				<p class="text-center font-[Cantarell] text-2xl text-white">
 					Premium, seamless, and durable floors for modern homes and commercial spaces.
 				</p>
-				<Button onclick={() => goto('/services')} variant="outline" class="mt-8 uppercase"
-					>Portfolio</Button
-				>
 			</div>
 		{/if}
+		<Button onclick={() => goto('/services')} variant="outline" class="mt-8 uppercase absolute bottom-[15%] "
+			>Portfolio</Button
+		>
 	</section>
 
 	<!-- know more why -->

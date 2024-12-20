@@ -64,7 +64,7 @@
 								<img
 									src="/{$page.params.id}/carousel/{idx}.jpg"
 									alt=""
-									class="h-full w-full scale-125 rounded-2xl object-cover object-center"
+									class="w-full aspect-16/9 max-h-[50vh] scale-125 rounded-2xl object-cover object-center"
 								/></Card.Content
 							>
 						</Card.Root>
