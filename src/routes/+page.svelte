@@ -9,7 +9,7 @@
 	import { fade } from 'svelte/transition';
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
-	import { services } from '$lib/stores.svelte';
+	import { isMobile, services } from '$lib/stores.svelte';
 
 	let initScroll = $state(0);
 	let tweenInstance: gsap.core.Tween;
@@ -115,9 +115,10 @@
 
 			width: '4rem',
 			height: '4rem',
-
 			top: '1rem',
 			left: '6%',
+			zIndex: 50,
+
 			filter: 'invert(1)',
 			webkitFilter: 'invert(1)',
 
@@ -133,8 +134,8 @@
 
 <svelte:window onscroll={handleScroll} bind:scrollY={initScroll} />
 
-<main class="flex w-screen flex-col items-center gap-8 pb-48">
-	<div id="logo" class="fixed top-[12vh] z-50 aspect-square h-[50vh] w-[50vh]">
+<main class="flex w-screen flex-col items-center gap-16 lg:gap-8 pb-48">
+	<div id="logo" class="fixed top-[12vh] z-10 aspect-square h-[50vh] w-[50vh]">
 		<Logo />
 	</div>
 
@@ -163,12 +164,12 @@
 	</section>
 
 	<!-- know more why -->
-	<section class="flex w-full flex-col items-center gap-16 px-[6%] pt-16 font-[Alatsi]">
+	<section class="flex w-full flex-col items-center px-[6%] pt-16 font-[Alatsi] lg:gap-12">
 		<h1 class="text-2xl leading-10">Why Luxury Flooring ?</h1>
 
-		<div class="grid w-full grid-flow-row-dense grid-cols-6 grid-rows-3">
+		<div class="grid w-full grid-flow-row-dense grid-cols-6 grid-rows-3 gap-10">
 			<div class="col-span-6 flex w-full items-center justify-center">
-				<div class="w-1/2 overflow-hidden rounded-3xl">
+				<div class="overflow-hidden rounded-3xl lg:w-1/2">
 					<img
 						src="/landing/tiles.jpeg"
 						alt=""
@@ -179,12 +180,14 @@
 
 			{#each whyPoints as point, i}
 				<div
-					class="flex flex-row gap-2 font-[Alatsi] {i <= 2
-						? 'col-span-2 items-center'
-						: 'col-span-3 px-[15%]'}"
+					class="flex flex-row gap-2 font-[Alatsi] {$isMobile
+						? 'col-span-6'
+						: i <= 2
+							? 'col-span-2 items-center'
+							: 'col-span-3 px-[15%]'}"
 				>
-					<span class="text-[9rem] leading-[50%]">{i + 1}</span>
-					<span>
+					<span class="mt-5 w-1/4 text-[7rem] leading-[50%] lg:w-auto lg:text-[9rem]">{i + 1}</span>
+					<span class="w-3/4 lg:w-auto">
 						{point.title} <br />
 						<span class="font-[Cantarell]">{point.desc}</span>
 					</span>
@@ -195,15 +198,14 @@
 
 	<!-- services -->
 	<section
-		class="flex scroll-mt-32 flex-col items-center gap-16 px-[6%] pb-16"
+		class="flex scroll-mt-32 flex-col items-center gap-12 lg:gap-16 px-[6%] pb-16"
 		id="services"
 		bind:this={servicesSection}
 	>
 		<h1 class="text-center text-4xl font-semibold leading-10">Services</h1>
 
-		<div class="grid w-full grid-cols-3 gap-10">
+		<div class="grid w-full lg:grid-cols-3 gap-10">
 			{#each knowMorePoints as point, i}
-				<!-- {@const section = point.title.toLowerCase().replaceAll(' ', '-')} -->
 				<div class="flex flex-col items-center gap-4 text-center">
 					<button
 						onclick={() => goto(`/services/${services[i]}`)}
@@ -229,19 +231,19 @@
 	</section>
 
 	<!-- testimonials -->
-	<section class="flex w-full flex-col gap-16 pb-16 text-center">
+	<section class="flex w-full flex-col gap-12 lg:gap-16 pb-16 text-center">
 		<h1 class="text-center text-4xl font-semibold leading-10">Testimonials</h1>
 
 		<ScrollArea orientation="horizontal" class="w-full">
 			<div class="flex flex-row gap-8 px-[30vw] pb-4">
 				{#each testimonials as item, idx (idx)}
-					<Card.Root class="min-h-[65vh] w-[30vw] bg-black">
+					<Card.Root class="min-h-[65vh] w-[80vw] lg:w-[30vw] bg-black">
 						<Card.Header>
 							<img src="/quote.png" class="aspect-square w-16" alt="" />
 						</Card.Header>
 						<Card.Content>
 							<!-- <ScrollArea> -->
-							<div class="text-left text-xl font-semibold text-[#FFFFFFCC]">
+							<div class="text-left lg:text-xl font-semibold text-[#FFFFFFCC]">
 								{item.testimonial}
 								<br />
 								<span class="text-[#C7A865]">{item.author}</span>
