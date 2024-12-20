@@ -12,7 +12,6 @@ export type Service = typeof services[number];
 
 type ServiceData = {
 	[key: Service]: {
-		caption: string;
 		applications: string[];
 		description: string;
 		colorChartPoints: string[];
@@ -21,7 +20,6 @@ type ServiceData = {
 
 export const serviceData: ServiceData = {
 	'metalic-epoxy-floors': {
-		caption: "Vibrant Colors",
 		applications: [
 			"House Basement",
 			"Car Dealerships",
@@ -38,7 +36,6 @@ export const serviceData: ServiceData = {
 		]
 	},
 	'flake-epoxy-floors': {
-		caption: "Wide choice of blends",
 		applications: [
 			"House Basement",
 			"Patios",
@@ -55,7 +52,6 @@ export const serviceData: ServiceData = {
 		]
 	},
 	'epoxy-countertops': {
-		caption: "Seemless and hygienic",
 		applications: [
 			"Bar Top",
 			"Residential Kitchens",
@@ -72,7 +68,6 @@ export const serviceData: ServiceData = {
 		]
 	},
 	'texture-deck': {
-		caption: "Durable surface",
 		applications: [
 			"Walkways and Driveways",
 			"Pool Decks",
@@ -88,7 +83,6 @@ export const serviceData: ServiceData = {
 		]
 	},
 	'concrete-walls': {
-		caption: "Durable and weather-resistant",
 		applications: [
 			"Walkways and Driveways",
 			"Parking Lots",

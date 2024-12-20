@@ -8,6 +8,7 @@
 	import { Button } from '$lib/components/ui/button';
 	import Autoplay from 'embla-carousel-autoplay';
 	import { fade, slide } from 'svelte/transition';
+	import { onMount } from 'svelte';
 
 	let selectedServiceData = $derived(serviceData[$page.params.id]);
 
@@ -32,7 +33,7 @@
 
 	$effect(() => {
 		if (!selectedServiceData) {
-			goto('/#services');
+			goto('/?services');
 		}
 	});
 </script>
