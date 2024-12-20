@@ -1,5 +1,6 @@
 import { writable } from "svelte/store";
 
+export const quoteDialogOpen = writable(false);
 
 export const services = [
 	'metalic-epoxy-floors',

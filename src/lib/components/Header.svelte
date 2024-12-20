@@ -12,6 +12,7 @@
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
 	import Logo from '../icons/logo.svelte';
+	import { quoteDialogOpen } from '$lib/stores.svelte';
 
 	let initScroll = $state(0);
 	let isLandingPage = $derived($page.route.id === '/');
@@ -54,7 +55,6 @@
 		</button>
 
 		<div class="flex flex-row items-center justify-evenly gap-8">
-
 			<a
 				href="/?services"
 				class="{initScroll < $scrollThreshold && isLandingPage
@@ -69,7 +69,7 @@
 				<PhoneCall color={initScroll < $scrollThreshold && isLandingPage ? 'white' : 'black'} />
 			</a>
 
-			<Dialog.Root>
+			<Dialog.Root bind:open={$quoteDialogOpen}>
 				<Dialog.Trigger
 					class={buttonVariants({
 						variant: initScroll < $scrollThreshold && isLandingPage ? 'secondary' : 'default'
@@ -117,6 +117,7 @@
 							<!-- TODO: add staticforms functionality -->
 							<h6 class="flex items-end text-lg font-semibold">Custom Design</h6>
 							<Input type="text" placeholder="Name" />
+							<Input type="phone" placeholder="Phone" />
 							<Input type="email" placeholder="Email" />
 							<Button class="px-8">Submit</Button>
 						</div>

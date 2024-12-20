@@ -1,13 +1,14 @@
 <script lang="ts">
 	import { PUBLIC_COMPANY_NAME, PUBLIC_DOMAIN } from '$env/static/public';
 	import Logo from '$lib/icons/logo.svelte';
+	import { quoteDialogOpen } from '$lib/stores.svelte';
 
 	const menuItems = [
 		{ label: 'OUR STORY', route: '/our-story' },
 		{ label: 'SERVICES', route: '/?services' },
 		{ label: 'TERMS AND CONDITIONS', route: '/terms-and-conditions' },
 		{ label: 'GALLERY', route: '/gallery' },
-		{ label: 'FREE QUOTES', route: '/free-quotes' }
+		{ label: 'FREE QUOTES', route: '' }
 	];
 </script>
 
@@ -15,11 +16,11 @@
 	<div
 		class="flex w-full flex-row justify-between text-[#FFFFFF99] *:*:underline *:*:transition-all *:*:duration-300 *:*:ease-in-out hover:*:*:text-white"
 	>
-		<!-- TODO: add social links -->
 		<div class="">
-			<a href="">Book A Call</a>
+			<button onclick={() => ($quoteDialogOpen = true)}>Book A Call</button>
 		</div>
 		<div class="flex gap-8">
+			<!-- TODO: add social links -->
 			<a href="">Instagram</a>
 			<a href="">TikTok</a>
 		</div>
@@ -35,6 +36,12 @@
 		{#each menuItems as item, i}
 			<a
 				href={item.route}
+				onclick={(e) => {
+					if (item.label === 'FREE QUOTES') {
+						e.preventDefault();
+						$quoteDialogOpen = true;
+					}
+				}}
 				class="whitespace-normal break-keep font-[Cantarell] text-lg font-bold text-white hover:text-[#FFFFFF99]"
 			>
 				{item.label}
