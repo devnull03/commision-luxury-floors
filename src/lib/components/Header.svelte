@@ -42,7 +42,7 @@
 
 <nav class="realtive">
 	{#if !isLandingPage}
-		<div class="fixed left-[6%] top-4 aspect-square h-16 w-16 invert">
+		<div class="fixed left-[6%] top-4 aspect-square h-16 w-16 invert z-[99]">
 			<Logo />
 		</div>
 	{/if}
