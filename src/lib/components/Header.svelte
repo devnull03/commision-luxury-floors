@@ -56,7 +56,7 @@
 		<div class="flex flex-row items-center justify-evenly gap-8">
 
 			<a
-				href="/services"
+				href="/#services"
 				class="{initScroll < $scrollThreshold && isLandingPage
 					? 'text-white'
 					: 'text-black'} font-semibold">Services</a

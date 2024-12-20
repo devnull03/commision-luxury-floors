@@ -32,7 +32,7 @@
 
 	$effect(() => {
 		if (!selectedServiceData) {
-			goto('/services');
+			goto('/#services');
 		}
 	});
 </script>
@@ -64,7 +64,7 @@
 								<img
 									src="/{$page.params.id}/carousel/{idx}.jpg"
 									alt=""
-									class="w-full aspect-16/9 max-h-[50vh] scale-125 rounded-2xl object-cover object-center"
+									class="aspect-16/9 max-h-[50vh] w-full scale-125 rounded-2xl object-cover object-center"
 								/></Card.Content
 							>
 						</Card.Root>
@@ -74,7 +74,9 @@
 		</Carousel.Root>
 
 		{#key currentSlide}
-			<h2 transition:slide={{duration: 1000}} class="font-[Alatsi] text-2xl font-semibold">{carouselCaptions[currentSlide]}</h2>
+			<h2 transition:slide={{ duration: 1000 }} class="font-[Alatsi] text-2xl font-semibold">
+				{carouselCaptions[currentSlide]}
+			</h2>
 		{/key}
 	</section>
 

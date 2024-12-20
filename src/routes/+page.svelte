@@ -149,7 +149,7 @@
 				</p>
 			</div>
 		{/if}
-		<Button onclick={() => goto('/services')} variant="outline" class="mt-8 uppercase absolute bottom-[15%] "
+		<Button onclick={() => goto('/gallery')} variant="outline" class="mt-8 uppercase absolute bottom-[15%] "
 			>Portfolio</Button
 		>
 	</section>
@@ -186,7 +186,7 @@
 	</section>
 
 	<!-- services -->
-	<section class="flex flex-col items-center gap-16 px-[6%] pb-16">
+	<section class="flex flex-col items-center gap-16 px-[6%] pb-16" id="services">
 		<h1 class="text-center text-4xl font-semibold leading-10">Services</h1>
 
 		<div class="grid w-full grid-cols-3 gap-10">

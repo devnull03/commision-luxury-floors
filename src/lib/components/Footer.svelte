@@ -4,7 +4,7 @@
 
 	const menuItems = [
 		{ label: 'OUR STORY', route: '/our-story' },
-		{ label: 'SERVICES', route: '/services' },
+		{ label: 'SERVICES', route: '/#services' },
 		{ label: 'TERMS AND CONDITIONS', route: '/terms-and-conditions' },
 		{ label: 'GALLERY', route: '/gallery' },
 		{ label: 'FREE QUOTES', route: '/free-quotes' }
