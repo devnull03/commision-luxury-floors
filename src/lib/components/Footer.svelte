@@ -4,11 +4,11 @@
 	import { quoteDialogOpen } from '$lib/stores.svelte';
 
 	const menuItems = [
-		{ label: 'OUR STORY', route: '/our-story' },
 		{ label: 'SERVICES', route: '/?services' },
-		{ label: 'TERMS AND CONDITIONS', route: '/terms-and-conditions' },
+		{ label: 'OUR STORY', route: '/our-story' },
 		{ label: 'GALLERY', route: '/gallery' },
-		{ label: 'FREE QUOTES', route: '' }
+		{ label: 'FREE QUOTES', route: '' },
+		{ label: 'TERMS AND CONDITIONS', route: '/terms-and-conditions' }
 	];
 </script>
 
@@ -19,7 +19,7 @@
 		<div class="">
 			<button onclick={() => ($quoteDialogOpen = true)}>Book A Call</button>
 		</div>
-		<div class="flex gap-8">
+		<div class="flex gap-2 lg:gap-8">
 			<!-- TODO: add social links -->
 			<a href="">Instagram</a>
 			<a href="">TikTok</a>
@@ -31,7 +31,7 @@
 	</div>
 
 	<div
-		class="flex w-full flex-row justify-around gap-4 *:transition-all *:duration-300 *:ease-in-out"
+		class="flex w-full flex-wrap justify-evenly gap-4 *:transition-all *:duration-300 *:ease-in-out lg:justify-around"
 	>
 		{#each menuItems as item, i}
 			<a
@@ -42,7 +42,7 @@
 						$quoteDialogOpen = true;
 					}
 				}}
-				class="whitespace-normal break-keep font-[Cantarell] text-lg font-bold text-white hover:text-[#FFFFFF99]"
+				class="whitespace-normal break-keep font-[Cantarell] text-sm font-bold text-white hover:text-[#FFFFFF99] lg:text-lg"
 			>
 				{item.label}
 			</a>

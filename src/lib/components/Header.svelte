@@ -12,7 +12,8 @@
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
 	import Logo from '../icons/logo.svelte';
-	import { quoteDialogOpen } from '$lib/stores.svelte';
+	import { isMobile, quoteDialogOpen } from '$lib/stores.svelte';
+	import { slide } from 'svelte/transition';
 
 	let initScroll = $state(0);
 	let isLandingPage = $derived($page.route.id === '/');
@@ -25,27 +26,36 @@
 		return quoteArea[0] * epoxyMultiplier;
 	});
 
+	let mobileNavButtonWidth: number = $state(0);
+	let mobileNavOpen = $state(false);
+
+	$effect(() => {
+		$isMobile = mobileNavButtonWidth !== 0;
+	});
+
+	let colorState = $derived(!$isMobile ? initScroll < $scrollThreshold && isLandingPage : false);
+
 	onMount(() => {});
 </script>
 
 <svelte:window bind:scrollY={initScroll} />
 
-<nav class="">
+<nav class="realtive">
 	{#if !isLandingPage}
-		<div class="fixed left-[6%] top-4 z-[999] aspect-square h-16 w-16 invert">
+		<div class="fixed left-[6%] top-4 aspect-square h-16 w-16 invert">
 			<Logo />
 		</div>
 	{/if}
 
 	<div
-		class="fixed top-0 z-50 flex h-24 w-full flex-row justify-between px-[6%] {initScroll <
+		class="fixed top-0 z-50 flex h-24 w-full flex-row justify-between border-b px-[6%] {initScroll <
 			$scrollThreshold && isLandingPage
-			? 'bg-transparent'
-			: 'bg-white'} transition-all duration-500 ease-in-out"
+			? 'bg-transparent border-transparent'
+			: 'bg-white'} border-black transition-all duration-500 ease-in-out lg:border-transparent"
 	>
 		<button
-			class="flex items-center pl-20 font-[Cantarell] text-2xl {initScroll < $scrollThreshold &&
-			isLandingPage
+			class="flex items-center pl-20 font-[Cantarell] text-xl lg:text-2xl {initScroll <
+				$scrollThreshold && isLandingPage
 				? 'text-transparent'
 				: 'text-[#00000080]'}"
 			id="header-logo-area"
@@ -54,76 +64,97 @@
 			Luxry Floors
 		</button>
 
-		<div class="flex flex-row items-center justify-evenly gap-8">
-			<a
-				href="/?services"
-				class="{initScroll < $scrollThreshold && isLandingPage
-					? 'text-white'
-					: 'text-black'} font-semibold">Services</a
+		<button
+			class="absolute right-4 top-0 px-8 py-10 md:hidden lg:hidden {initScroll < $scrollThreshold &&
+			isLandingPage
+				? 'text-white'
+				: 'text-black'}"
+			bind:clientWidth={mobileNavButtonWidth}
+			onclick={() => (mobileNavOpen = !mobileNavOpen)}
+		>
+			{#if mobileNavOpen}
+				<span class="fa fa-times scale-150"></span>
+			{:else}
+				<span class="fa fa-bars scale-150"></span>
+			{/if}
+		</button>
+
+		{#if !$isMobile || mobileNavOpen}
+			<div
+				transition:slide
+				class="absolute top-24 z-[999] -mx-[6%] flex w-screen flex-col items-center justify-evenly gap-8 border-b border-black bg-white py-4 lg:relative lg:mx-0 lg:w-auto lg:flex-row lg:border-white lg:py-0"
 			>
-
-			<a href="https://instagram.com" class="text-xs font-semibold uppercase">
-				<Instagram color={initScroll < $scrollThreshold && isLandingPage ? 'white' : 'black'} />
-			</a>
-			<a href="tel:+1234567890" class="text-xs font-semibold uppercase">
-				<PhoneCall color={initScroll < $scrollThreshold && isLandingPage ? 'white' : 'black'} />
-			</a>
-
-			<Dialog.Root bind:open={$quoteDialogOpen}>
-				<Dialog.Trigger
-					class={buttonVariants({
-						variant: initScroll < $scrollThreshold && isLandingPage ? 'secondary' : 'default'
-					})}
+				<a href="/?services" class="{colorState ? 'text-white' : 'text-black'} font-semibold"
+					>Services</a
 				>
-					Get Quote
-				</Dialog.Trigger>
-				<Dialog.Content class="max-w-[60vw]">
-					<Dialog.Header>
-						<Dialog.Title class="text-center text-2xl font-semibold">Quote</Dialog.Title>
-					</Dialog.Header>
 
-					<div class="flex w-full items-center justify-evenly">
-						<!-- quote calculator -->
-						<div class="grid h-full w-1/2 grid-cols-2 grid-rows-6 gap-4 font-semibold lg:p-8">
-							<h6 class="col-span-2 flex items-end">Type of Epoxy</h6>
+				<a href="https://instagram.com" class="text-xs font-semibold uppercase">
+					<Instagram color={colorState ? 'white' : 'black'} />
+				</a>
+				<a href="tel:+1234567890" class="text-xs font-semibold uppercase">
+					<PhoneCall color={colorState ? 'white' : 'black'} />
+				</a>
 
-							<Button
-								variant={quoteEpoxyType === 'Metalic' ? 'default' : 'secondary'}
-								onclick={() => (quoteEpoxyType = 'Metalic')}>Metalic</Button
+				<Dialog.Root bind:open={$quoteDialogOpen}>
+					<Dialog.Trigger
+						class={buttonVariants({
+							variant: colorState ? 'secondary' : 'default'
+						})}
+					>
+						Get Quote
+					</Dialog.Trigger>
+					<Dialog.Content class="lg:max-w-[60vw]">
+						<Dialog.Header>
+							<Dialog.Title class="text-center text-2xl font-semibold">Quote</Dialog.Title>
+						</Dialog.Header>
+
+						<div class="flex w-full flex-col items-center justify-evenly lg:flex-row">
+							<!-- quote calculator -->
+							<div
+								class="grid h-full w-full grid-cols-2 grid-rows-6 gap-4 p-8 font-semibold lg:w-1/2"
 							>
-							<Button
-								variant={quoteEpoxyType === 'Flake' ? 'default' : 'secondary'}
-								onclick={() => (quoteEpoxyType = 'Flake')}>Flake</Button
+								<h6 class="col-span-2 flex items-end">Type of Epoxy</h6>
+
+								<Button
+									variant={quoteEpoxyType === 'Metalic' ? 'default' : 'secondary'}
+									onclick={() => (quoteEpoxyType = 'Metalic')}>Metalic</Button
+								>
+								<Button
+									variant={quoteEpoxyType === 'Flake' ? 'default' : 'secondary'}
+									onclick={() => (quoteEpoxyType = 'Flake')}>Flake</Button
+								>
+
+								<h6 class="col-span-2 flex items-end">Area of the Floor</h6>
+
+								<Slider class="col-span-2" bind:value={quoteArea} max={5000} />
+
+								&nbsp;
+
+								<span class="flex items-center justify-center">{quoteArea} sqft</span>
+
+								<span class="col-span-2 {buttonVariants({ variant: 'default' })}"
+									>Total Estimate: ${quoteTotal()}</span
+								>
+							</div>
+
+							<!-- divider -->
+							<div class="h-0.5 w-[60%] rounded-lg bg-black lg:h-[60%] lg:w-0.5">&nbsp;</div>
+
+							<!-- custom quote -->
+							<div
+								class="flex h-full w-full flex-col items-center justify-center gap-4 *:max-w-[70%] lg:w-1/2"
 							>
-
-							<h6 class="col-span-2 flex items-end">Area of the Floor</h6>
-
-							<Slider class="col-span-2" bind:value={quoteArea} max={5000} />
-
-							&nbsp;
-
-							<span class="flex items-center justify-center">{quoteArea} sqft</span>
-
-							<span class="col-span-2 {buttonVariants({ variant: 'default' })}"
-								>Total Estimate: ${quoteTotal()}</span
-							>
+								<!-- TODO: add staticforms functionality -->
+								<h6 class="flex items-end text-lg font-semibold">Custom Design</h6>
+								<Input type="text" placeholder="Name" />
+								<Input type="phone" placeholder="Phone" />
+								<Input type="email" placeholder="Email" />
+								<Button class="px-8">Submit</Button>
+							</div>
 						</div>
-
-						<!-- divider -->
-						<div class=" h-[60%] w-0.5 rounded-lg bg-black">&nbsp;</div>
-
-						<!-- custom quote -->
-						<div class="flex h-full w-1/2 flex-col items-center justify-center gap-4 *:max-w-[70%]">
-							<!-- TODO: add staticforms functionality -->
-							<h6 class="flex items-end text-lg font-semibold">Custom Design</h6>
-							<Input type="text" placeholder="Name" />
-							<Input type="phone" placeholder="Phone" />
-							<Input type="email" placeholder="Email" />
-							<Button class="px-8">Submit</Button>
-						</div>
-					</div>
-				</Dialog.Content>
-			</Dialog.Root>
-		</div>
+					</Dialog.Content>
+				</Dialog.Root>
+			</div>
+		{/if}
 	</div>
 </nav>
