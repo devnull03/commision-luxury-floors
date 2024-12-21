@@ -137,7 +137,13 @@
 				</div>
 			</div>
 
-			<Button variant="secondary" class="w-min">Download Color Chart</Button>
+			<Button
+				download="{$page.params.id}_color_scheme.pdf"
+				target="_blank"
+				href="/{$page.params.id}/pallet/color_scheme.pdf"
+				variant="secondary"
+				class="w-min">Download Color Chart</Button
+			>
 		</div>
 	</section>
 </main>
