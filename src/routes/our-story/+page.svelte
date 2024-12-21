@@ -2,9 +2,9 @@
 	import Logo from '$lib/icons/logo.svelte';
 </script>
 
-<main class="mt-16">
+<main class="lg:mt-16 mt-24">
 	<!-- landing -->
-	<section class="flex flex-col items-center justify-center gap-16 bg-black px-36 py-28">
+	<section class="flex flex-col items-center justify-center gap-16 bg-black px-10 lg:px-36 py-28">
 		<div class="text-center font-[Cantarell] text-white">
 			<div class="foot-logo aspect-square h-[40vh]">
 				<Logo />
@@ -17,7 +17,7 @@
 		</div>
 	</section>
 
-	<section class="p-36 font-[Cantarell] leading-10">
+	<section class="lg:p-36 p-10 font-[Cantarell] leading-10">
 		<h1 class="mb-4 text-center text-2xl font-bold">Our Story</h1>
 
 		Our journey began with a simple vision: to redefine flooring by offering not just surfaces, but

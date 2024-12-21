@@ -2,17 +2,19 @@
 	import Logo from '$lib/icons/logo.svelte';
 </script>
 
-<main class="mt-16">
+<main class="mt-24 lg:mt-16">
 	<!-- landing -->
-	<section class="flex flex-row items-center justify-center gap-16 bg-black py-28">
+	<section class="flex flex-col items-center justify-center gap-16 bg-black py-28 lg:flex-row">
 		<div class="foot-logo aspect-square h-[25vh]">
 			<Logo />
 		</div>
 
-		<div class="text-center text-4xl font-semibold text-white">Terms and Conditions</div>
+		<div class="text-center text-3xl font-semibold text-white lg:text-4xl">
+			Terms and Conditions
+		</div>
 	</section>
 
-	<section class="p-28 font-[Cantarell] leading-10">
+	<section class="lg:p-28 p-10 font-[Cantarell] leading-10">
 		<h3>Warranty Coverage</h3>
 		This warranty covers the following:
 		<ol>
@@ -99,8 +101,7 @@
 		@apply text-2xl font-bold;
 	}
 
-    ol {
-        @apply list-decimal list-inside pl-4;
-    }
-
+	ol {
+		@apply list-inside list-decimal pl-4;
+	}
 </style>
