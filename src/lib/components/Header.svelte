@@ -41,7 +41,7 @@
 
 <nav class="realtive">
 	{#if !isLandingPage}
-		<div class="fixed left-[6%] top-4 z-[99] aspect-square h-16 w-16 invert">
+		<div class="fixed left-[6%] top-4 z-[55] aspect-square h-16 w-16 invert">
 			<Logo />
 		</div>
 	{/if}
@@ -132,7 +132,7 @@
 				<span class="flex items-center justify-center">{quoteArea} sqft</span>
 
 				<span class="col-span-2 {buttonVariants({ variant: 'default' })}"
-					>Total Estimate: ${quoteTotal()}</span
+					>From: ${quoteTotal()}</span
 				>
 			</div>
 
