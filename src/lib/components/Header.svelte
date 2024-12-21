@@ -42,7 +42,7 @@
 
 <nav class="realtive">
 	{#if !isLandingPage}
-		<div class="fixed left-[6%] top-4 aspect-square h-16 w-16 invert z-[99]">
+		<div class="fixed left-[6%] top-4 z-[99] aspect-square h-16 w-16 invert">
 			<Logo />
 		</div>
 	{/if}
@@ -50,7 +50,7 @@
 	<div
 		class="fixed top-0 z-50 flex h-24 w-full flex-row justify-between border-b px-[6%] {initScroll <
 			$scrollThreshold && isLandingPage
-			? 'bg-transparent border-transparent'
+			? 'border-transparent bg-transparent'
 			: 'bg-white'} border-black transition-all duration-500 ease-in-out lg:border-transparent"
 	>
 		<button
@@ -95,66 +95,62 @@
 					<PhoneCall color={colorState ? 'white' : 'black'} />
 				</a>
 
-				<Dialog.Root bind:open={$quoteDialogOpen}>
-					<Dialog.Trigger
-						class={buttonVariants({
-							variant: colorState ? 'secondary' : 'default'
-						})}
-					>
-						Get Quote
-					</Dialog.Trigger>
-					<Dialog.Content class="lg:max-w-[60vw]">
-						<Dialog.Header>
-							<Dialog.Title class="text-center text-2xl font-semibold">Quote</Dialog.Title>
-						</Dialog.Header>
-
-						<div class="flex w-full flex-col items-center justify-evenly lg:flex-row">
-							<!-- quote calculator -->
-							<div
-								class="grid h-full w-full grid-cols-2 grid-rows-6 gap-4 p-8 font-semibold lg:w-1/2"
-							>
-								<h6 class="col-span-2 flex items-end">Type of Epoxy</h6>
-
-								<Button
-									variant={quoteEpoxyType === 'Metalic' ? 'default' : 'secondary'}
-									onclick={() => (quoteEpoxyType = 'Metalic')}>Metalic</Button
-								>
-								<Button
-									variant={quoteEpoxyType === 'Flake' ? 'default' : 'secondary'}
-									onclick={() => (quoteEpoxyType = 'Flake')}>Flake</Button
-								>
-
-								<h6 class="col-span-2 flex items-end">Area of the Floor</h6>
-
-								<Slider class="col-span-2" bind:value={quoteArea} max={5000} />
-
-								&nbsp;
-
-								<span class="flex items-center justify-center">{quoteArea} sqft</span>
-
-								<span class="col-span-2 {buttonVariants({ variant: 'default' })}"
-									>Total Estimate: ${quoteTotal()}</span
-								>
-							</div>
-
-							<!-- divider -->
-							<div class="h-0.5 w-[60%] rounded-lg bg-black lg:h-[60%] lg:w-0.5">&nbsp;</div>
-
-							<!-- custom quote -->
-							<div
-								class="flex h-full w-full flex-col items-center justify-center gap-4 *:max-w-[70%] lg:w-1/2"
-							>
-								<!-- TODO: add staticforms functionality -->
-								<h6 class="flex items-end text-lg font-semibold">Custom Design</h6>
-								<Input type="text" placeholder="Name" />
-								<Input type="phone" placeholder="Phone" />
-								<Input type="email" placeholder="Email" />
-								<Button class="px-8">Submit</Button>
-							</div>
-						</div>
-					</Dialog.Content>
-				</Dialog.Root>
+				<Button
+					onclick={() => ($quoteDialogOpen = true)}
+					variant={colorState ? 'secondary' : 'default'}>Get Quote</Button
+				>
 			</div>
 		{/if}
 	</div>
 </nav>
+
+<Dialog.Root bind:open={$quoteDialogOpen}>
+	<Dialog.Content class="lg:max-w-[60vw]">
+		<Dialog.Header>
+			<Dialog.Title class="text-center text-2xl font-semibold">Quote</Dialog.Title>
+		</Dialog.Header>
+
+		<div class="flex w-full flex-col items-center justify-evenly lg:flex-row">
+			<!-- quote calculator -->
+			<div class="grid h-full w-full grid-cols-2 grid-rows-6 gap-4 p-8 font-semibold lg:w-1/2">
+				<h6 class="col-span-2 flex items-end">Type of Epoxy</h6>
+
+				<Button
+					variant={quoteEpoxyType === 'Metalic' ? 'default' : 'secondary'}
+					onclick={() => (quoteEpoxyType = 'Metalic')}>Metalic</Button
+				>
+				<Button
+					variant={quoteEpoxyType === 'Flake' ? 'default' : 'secondary'}
+					onclick={() => (quoteEpoxyType = 'Flake')}>Flake</Button
+				>
+
+				<h6 class="col-span-2 flex items-end">Area of the Floor</h6>
+
+				<Slider class="col-span-2" bind:value={quoteArea} max={5000} />
+
+				&nbsp;
+
+				<span class="flex items-center justify-center">{quoteArea} sqft</span>
+
+				<span class="col-span-2 {buttonVariants({ variant: 'default' })}"
+					>Total Estimate: ${quoteTotal()}</span
+				>
+			</div>
+
+			<!-- divider -->
+			<div class="h-0.5 w-[60%] rounded-lg bg-black lg:h-[60%] lg:w-0.5">&nbsp;</div>
+
+			<!-- custom quote -->
+			<div
+				class="flex h-full w-full flex-col items-center justify-center gap-4 *:max-w-[70%] lg:w-1/2"
+			>
+				<!-- TODO: add staticforms functionality -->
+				<h6 class="flex items-end text-lg font-semibold">Custom Design</h6>
+				<Input type="text" placeholder="Name" />
+				<Input type="phone" placeholder="Phone" />
+				<Input type="email" placeholder="Email" />
+				<Button class="px-8">Submit</Button>
+			</div>
+		</div>
+	</Dialog.Content>
+</Dialog.Root>
