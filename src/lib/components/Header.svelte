@@ -21,7 +21,6 @@
 	let quoteArea = $state([0]);
 	let quoteEpoxyType = $state<'Metalic' | 'Flake'>('Metalic');
 	let quoteTotal = $derived(() => {
-		// TODO: add quote formula
 		let epoxyMultiplier = quoteEpoxyType === 'Metalic' ? 10 : 5;
 		return quoteArea[0] * epoxyMultiplier;
 	});
