@@ -6,15 +6,6 @@
 	import * as Tooltip from '$lib/components/ui/tooltip/index.js';
 	import { services } from '$lib/stores.svelte';
 
-	const sectionImageCount = 7;
-	// const $services = [
-	// 	'metalic-epoxy-floors',
-	// 	'flake-epoxy-floors',
-	// 	'epoxy-countertops',
-	// 	'texture-deck',
-	// 	'concrete-walls'
-	// ];
-
 	let dialogOpen = $state(false);
 	let dialogImageSrc = $state('');
 </script>
@@ -54,7 +45,7 @@
 	</Tooltip.Root>
 {/snippet}
 
-<main class="mt-16 flex h-full flex-col gap-16 p-[6vw] font-[Cantarell]">
+<main class="lg:mt-16 mt-28 flex h-full flex-col gap-12 lg:gap-16 p-[6vw] font-[Cantarell]">
 	<h1 class="text-center text-3xl font-semibold">Portfolio</h1>
 
 	{#each services as section}
@@ -69,12 +60,12 @@
 				>
 			</h5>
 
-			<div class="grid h-[130vh] grid-cols-7 grid-rows-3 gap-8 overflow-clip">
+			<div class="grid h-[130vh] grid-cols-7 grid-rows-3 gap-1 lg:gap-8 overflow-clip">
 				{@render sectionFigure('col-span-5', section, 0)}
 				{@render sectionFigure('col-span-2', section, 1)}
 				{@render sectionFigure('col-span-2', section, 2)}
-				{@render sectionFigure('col-span-2', section, 3)}
-				{@render sectionFigure('col-span-3', section, 4)}
+				{@render sectionFigure('lg:col-span-2 col-span-5', section, 3)}
+				{@render sectionFigure('lg:col-span-3 col-span-7', section, 4)}
 				{@render sectionFigure('col-span-2', section, 5)}
 				{@render sectionFigure('col-span-5', section, 6)}
 			</div>
