@@ -10,6 +10,7 @@
 	import Footer from '$lib/components/Footer.svelte';
 	import Header from '$lib/components/Header.svelte';
 	import { Toaster } from '$lib/components/ui/sonner';
+	import { injectSpeedInsights } from '@vercel/speed-insights/sveltekit';
 
 	interface Props {
 		children?: import('svelte').Snippet;
@@ -22,6 +23,7 @@
 	let load = $derived(firstLoad || !$navigating);
 
 	injectAnalytics({ mode: dev ? 'development' : 'production' });
+	injectSpeedInsights();
 
 	onMount(() => {
 		firstLoad = false;
