@@ -118,12 +118,14 @@
 
 		<div class="flex flex-col items-center gap-6 rounded-3xl bg-black p-10 lg:py-20">
 			<div class="mx-auto flex flex-col gap-6 lg:flex-row">
-				<div class="flex flex-row-reverse justify-center gap-0 *:-mr-[10%] lg:w-1/2">
+				<div
+					class="flex flex-row-reverse justify-center gap-0 *:-mr-[10%] lg:w-1/2 lg:justify-start"
+				>
 					{#each Array(4) as _, idx}
 						<img
 							src="/{$page.params.id}/pallet/{idx}.png"
 							alt=""
-							class="aspect-square w-1/3 first:mr-auto lg:w-1/4"
+							class="aspect-square w-1/3 first:mr-auto lg:w-1/4 first:lg:mr-0"
 						/>
 					{/each}
 				</div>

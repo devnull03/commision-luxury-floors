@@ -50,7 +50,7 @@
 		class="fixed top-0 z-50 flex h-24 w-full flex-row justify-between border-b px-[6%] {initScroll <
 			$scrollThreshold && isLandingPage
 			? 'border-transparent bg-transparent'
-			: 'bg-white'} border-black transition-all duration-500 ease-in-out lg:border-transparent"
+			: 'bg-white'} border-black transition-all duration-500 ease-in-out"
 	>
 		<button
 			class="flex items-center pl-20 font-[Cantarell] text-xl lg:text-2xl {initScroll <
@@ -81,7 +81,7 @@
 		{#if !$isMobile || mobileNavOpen}
 			<div
 				transition:slide
-				class="absolute top-24 z-[999] -mx-[6%] flex w-screen flex-col items-center justify-evenly gap-8 border-b border-black bg-white py-4 lg:relative lg:mx-0 lg:w-auto lg:flex-row lg:border-white lg:py-0"
+				class="absolute top-24 z-[999] -mx-[6%] flex w-screen flex-col items-center justify-evenly gap-8 border-b border-black bg-white py-4 lg:relative lg:top-0 lg:mx-0 lg:w-auto lg:flex-row lg:border-transparent lg:bg-transparent lg:py-0"
 			>
 				<a href="/?services" class="{colorState ? 'text-white' : 'text-black'} font-semibold"
 					>Services</a

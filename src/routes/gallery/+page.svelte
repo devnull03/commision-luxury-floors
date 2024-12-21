@@ -45,7 +45,7 @@
 	</Tooltip.Root>
 {/snippet}
 
-<main class="lg:mt-16 mt-28 flex h-full flex-col gap-12 lg:gap-16 p-[6vw] font-[Cantarell]">
+<main class="mt-28 flex h-full flex-col gap-12 p-[6vw] font-[Cantarell] lg:mt-16 lg:gap-16">
 	<h1 class="text-center text-3xl font-semibold">Portfolio</h1>
 
 	{#each services as section}
@@ -55,12 +55,12 @@
 				{sectionTitle[0].toUpperCase() + sectionTitle.slice(1)}
 				<a
 					href="/services/{section}"
-					class="text-xs italic transition-all duration-300 ease-in-out hover:border-b hover:border-b-black"
-					>Read more...</a
+					class="text-xs transition-all duration-300 ease-in-out hover:border-b hover:border-b-black"
+					>Read more</a
 				>
 			</h5>
 
-			<div class="grid h-[130vh] grid-cols-7 grid-rows-3 gap-1 lg:gap-8 overflow-clip">
+			<div class="grid h-[130vh] grid-cols-7 grid-rows-3 gap-1 overflow-clip lg:gap-8">
 				{@render sectionFigure('col-span-5', section, 0)}
 				{@render sectionFigure('col-span-2', section, 1)}
 				{@render sectionFigure('col-span-2', section, 2)}
