@@ -1,11 +1,14 @@
 <script lang="ts">
+	import '../app.css';
+	import { onMount } from 'svelte';
+	import { fade, fly } from 'svelte/transition';
+	import { navigating } from '$app/stores';
 	import { PUBLIC_COMPANY_NAME } from '$env/static/public';
+
 	import Footer from '$lib/components/Footer.svelte';
 	import Header from '$lib/components/Header.svelte';
-	import { fade, fly } from 'svelte/transition';
-	import '../app.css';
-	import { navigating } from '$app/stores';
-	import { onMount } from 'svelte';
+	import { Toaster } from '$lib/components/ui/sonner';
+
 	interface Props {
 		children?: import('svelte').Snippet;
 	}
@@ -33,6 +36,8 @@
 </svelte:head>
 
 <svelte:window bind:scrollY />
+
+<Toaster />
 
 {#key load}
 	<div in:fade={{ duration: 400 }} class="flex h-screen flex-col justify-between">

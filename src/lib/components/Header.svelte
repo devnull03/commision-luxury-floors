@@ -14,6 +14,8 @@
 	import Logo from '../icons/logo.svelte';
 	import { isMobile, quoteDialogOpen } from '$lib/stores.svelte';
 	import { slide } from 'svelte/transition';
+	import { toast } from 'svelte-sonner';
+	import { PUBLIC_FORM_KEY } from '$env/static/public';
 
 	let initScroll = $state(0);
 	let isLandingPage = $derived($page.route.id === '/');
@@ -140,16 +142,43 @@
 			<div class="h-0.5 w-[60%] rounded-lg bg-black lg:h-[60%] lg:w-0.5">&nbsp;</div>
 
 			<!-- custom quote -->
-			<div
+			<form
+				method="POST"
+				action="https://api.staticforms.xyz/submit"
 				class="flex h-full w-full flex-col items-center justify-center gap-4 *:max-w-[70%] lg:w-1/2"
+				onsubmit={(e) => {
+					e.preventDefault();
+					const form = e.currentTarget;
+					const formData = new FormData(form);
+
+					fetch('https://api.staticforms.xyz/submit', {
+						method: 'POST',
+						body: formData
+					})
+						.then((response) => response.json())
+						.then((data) => {
+							if (data.success) {
+								toast.success('Message sent successfully!');
+							} else {
+								console.log(data);
+								toast.error(`Message failed to send! [error: ${data.message}]`);
+							}
+						});
+				}}
 			>
 				<!-- TODO: add staticforms functionality -->
 				<h6 class="flex items-end text-lg font-semibold">Custom Design</h6>
-				<Input type="text" placeholder="Name" />
-				<Input type="phone" placeholder="Phone" />
-				<Input type="email" placeholder="Email" />
-				<Button class="px-8">Submit</Button>
-			</div>
+				<Input type="text" placeholder="Name" name="name" />
+				<Input type="phone" placeholder="Phone" name="phone" />
+				<Input type="email" placeholder="Email" name="email" />
+
+				<input type="text" name="honeypot" style="display:none" />
+				<input type="hidden" name="accessKey" value={PUBLIC_FORM_KEY} />
+				<input type="hidden" name="subject" value="Contact us from - example.com" />
+				<input type="hidden" name="replyTo" value="@" />
+
+				<Button type="submit" class="px-8">Submit</Button>
+			</form>
 		</div>
 	</Dialog.Content>
 </Dialog.Root>
