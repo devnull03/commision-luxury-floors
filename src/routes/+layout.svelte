@@ -4,7 +4,9 @@
 	import { fade, fly } from 'svelte/transition';
 	import { navigating } from '$app/stores';
 	import { PUBLIC_COMPANY_NAME } from '$env/static/public';
+	import { dev } from '$app/environment';
 
+	import { injectAnalytics } from '@vercel/analytics/sveltekit';
 	import Footer from '$lib/components/Footer.svelte';
 	import Header from '$lib/components/Header.svelte';
 	import { Toaster } from '$lib/components/ui/sonner';
@@ -18,6 +20,8 @@
 
 	let firstLoad = $state(true);
 	let load = $derived(firstLoad || !$navigating);
+
+	injectAnalytics({ mode: dev ? 'development' : 'production' });
 
 	onMount(() => {
 		firstLoad = false;
@@ -33,6 +37,36 @@
 		rel="stylesheet"
 	/>
 	<script src="https://kit.fontawesome.com/30f055fc02.js" crossorigin="anonymous"></script>
+
+	<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+	<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+	<link rel="shortcut icon" href="/favicon.ico" />
+	<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+	<meta name="apple-mobile-web-app-title" content="Luxury Floors" />
+	<link rel="manifest" href="/site.webmanifest" />
+
+	<meta name="description" content="High-end flooring solutions for your home or business." />
+	<meta
+		name="keywords"
+		content="luxury floors, premium flooring, interior design, home improvement"
+	/>
+	<meta property="og:title" content="Luxury Floors" />
+	<meta
+		property="og:description"
+		content="High-end flooring solutions for your home or business."
+	/>
+	<meta property="og:image" content="/favicon-96x96.png" />
+	<meta property="og:url" content="https://www.luxuryfloors.ca" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:title" content="Luxury Floors" />
+	<meta
+		name="twitter:description"
+		content="High-end flooring solutions for your home or business."
+	/>
+	<meta name="twitter:image" content="/favicon-96x96.png" />
+	<meta name="author" content="Luxury Floors Inc." />
+	<meta name="geo.placename" content="British Columbia, Canada" />
+	<meta name="geo.region" content="CA-BC" />
 </svelte:head>
 
 <svelte:window bind:scrollY />

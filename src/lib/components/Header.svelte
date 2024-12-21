@@ -166,7 +166,6 @@
 						});
 				}}
 			>
-				<!-- TODO: add staticforms functionality -->
 				<h6 class="flex items-end text-lg font-semibold">Custom Design</h6>
 				<Input type="text" placeholder="Name" name="name" />
 				<Input type="phone" placeholder="Phone" name="phone" />
