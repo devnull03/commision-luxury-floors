@@ -10,6 +10,7 @@
 	import Autoplay from 'embla-carousel-autoplay';
 	import { slide } from 'svelte/transition';
 	import { ScrollArea } from '$lib/components/ui/scroll-area';
+	import Image from '$lib/components/Image.svelte';
 
 	let selectedServiceData = $derived(serviceData[$page.params.id]);
 
@@ -65,12 +66,12 @@
 					>
 						<Card.Root class="overflow-hidden !border-black">
 							<Card.Content class="lg:aspect-16/9 aspect-9/16 overflow-hidden object-cover p-0">
-								<img
-									src="/{$page.params.id}/carousel/{idx}.jpg"
-									alt=""
-									class="lg:aspect-16/9 aspect-9/16 h-[50vh] max-h-[50vh] w-full scale-125 rounded-2xl object-cover object-center lg:h-auto"
-								/></Card.Content
-							>
+								<Image 
+									url={`/assets/${$page.params.id}/carousel/${idx}.jpg`} 
+									description="" 
+									class="lg:aspect-16/9 aspect-9/16 h-[50vh] max-h-[50vh] w-full scale-125 rounded-2xl object-cover object-center lg:h-auto" 
+								/>
+							</Card.Content>
 						</Card.Root>
 					</Carousel.Item>
 				{/each}
@@ -90,7 +91,11 @@
 		<div class="grid w-full grid-cols-3 grid-rows-2 gap-4 lg:gap-0">
 			{#each selectedServiceData.applications as application, idx}
 				<figure class="flex aspect-square flex-col items-center justify-center gap-4">
-					<img src="/{$page.params.id}/applications/{idx}.png" alt="" class="w-[10vw]" />
+					<Image 
+						url={`/assets/${$page.params.id}/applications/${idx}.png`} 
+						description="" 
+						class="w-[10vw]" 
+					/>
 					<figcaption class="text-center text-xs">{application}</figcaption>
 				</figure>
 			{/each}
@@ -106,12 +111,20 @@
 	<section>
 		<Dialog.Root>
 			<Dialog.Trigger>
-				<img src="/{$page.params.id}/pallet/mats.png" alt="" class="mb-4" />
+				<Image 
+					url={`/assets/${$page.params.id}/pallet/mats.png`} 
+					description="" 
+					class="mb-4" 
+				/>
 			</Dialog.Trigger>
 
 			<Dialog.Content>
 				<ScrollArea class="max-h-[80vh]">
-					<img src="/{$page.params.id}/pallet/mats.png" alt="" />
+					<Image 
+						url={`/assets/${$page.params.id}/pallet/mats.png`} 
+						description="" 
+						class="" 
+					/>
 				</ScrollArea>
 			</Dialog.Content>
 		</Dialog.Root>
@@ -122,10 +135,10 @@
 					class="flex flex-row-reverse justify-center gap-0 *:-mr-[10%] lg:w-1/2 lg:justify-start"
 				>
 					{#each Array(4) as _, idx}
-						<img
-							src="/{$page.params.id}/pallet/{idx}.png"
-							alt=""
-							class="aspect-square w-1/3 first:mr-auto lg:w-1/4 first:lg:mr-0"
+						<Image 
+							url={`/assets/${$page.params.id}/pallet/${idx}.png`} 
+							description="" 
+							class="aspect-square w-1/3 first:mr-auto lg:w-1/4 first:lg:mr-0" 
 						/>
 					{/each}
 				</div>
@@ -142,7 +155,7 @@
 			<Button
 				download="{$page.params.id}_color_scheme.pdf"
 				target="_blank"
-				href="/{$page.params.id}/pallet/color_scheme.pdf"
+				href="/assets/{$page.params.id}/pallet/color_scheme.pdf"
 				variant="secondary"
 				class="w-min">Download Color Chart</Button
 			>

@@ -10,6 +10,7 @@
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
 	import { isMobile, services } from '$lib/stores.svelte';
+	import Image from '$lib/components/Image.svelte';
 
 	let initScroll = $state(0);
 	let tweenInstance: gsap.core.Tween;
@@ -142,7 +143,11 @@
 	<!-- landing screen -->
 	<section class="relative flex h-[80vh] w-full flex-row justify-evenly gap-0">
 		{#each Array(4) as _, i}
-			<img src="/landing/floor{i + 1}.png" class="w-1/4 object-cover object-left" alt="" />
+			<Image 
+				url={`/assets/landing/floor${i + 1}.png`} 
+				description="" 
+				class="w-1/4 object-cover object-left" 
+			/>
 		{/each}
 
 		{#if initScroll > $scrollThreshold}
@@ -170,9 +175,9 @@
 		<div class="grid w-full grid-flow-row-dense grid-cols-6 grid-rows-3 gap-10">
 			<div class="col-span-6 flex w-full items-center justify-center">
 				<div class="overflow-hidden rounded-3xl lg:w-1/2">
-					<img
-						src="/landing/tiles.jpeg"
-						alt=""
+					<Image 
+						url="/assets/landing/tiles.jpeg" 
+						description="" 
 						class="object-cover transition-all duration-500 ease-in-out hover:scale-110"
 					/>
 				</div>
@@ -211,10 +216,10 @@
 						onclick={() => goto(`/services/${services[i]}`)}
 						class=" aspect-square overflow-hidden rounded-3xl object-cover"
 					>
-						<img
-							src="/landing/more{i + 1}.jpeg"
-							class="h-full w-full object-cover transition-all duration-500 ease-in-out hover:scale-110"
-							alt=""
+						<Image 
+							url={`/assets/landing/more${i + 1}.jpeg`} 
+							description="" 
+							class="h-full w-full object-cover transition-all duration-500 ease-in-out hover:scale-110" 
 						/>
 					</button>
 
@@ -239,7 +244,11 @@
 				{#each testimonials as item, idx (idx)}
 					<Card.Root class="min-h-[65vh] w-[80vw] lg:w-[30vw] bg-black">
 						<Card.Header>
-							<img src="/quote.png" class="aspect-square w-16" alt="" />
+							<Image 
+								url="/assets/quote.png" 
+								description="" 
+								class="aspect-square w-16" 
+							/>
 						</Card.Header>
 						<Card.Content>
 							<!-- <ScrollArea> -->

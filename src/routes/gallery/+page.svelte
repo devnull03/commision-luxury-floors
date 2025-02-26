@@ -5,6 +5,7 @@
 	import { ScrollArea } from '$lib/components/ui/scroll-area';
 	import * as Tooltip from '$lib/components/ui/tooltip/index.js';
 	import { services } from '$lib/stores.svelte';
+	import Image from '$lib/components/Image.svelte';
 
 	let dialogOpen = $state(false);
 	let dialogImageSrc = $state('');
@@ -17,7 +18,7 @@
 <Dialog.Root bind:open={dialogOpen}>
 	<Dialog.Content>
 		<ScrollArea class="max-h-[80vh]">
-			<img src={dialogImageSrc} alt="" />
+			<Image url={dialogImageSrc} description="" class=""/>
 		</ScrollArea>
 	</Dialog.Content>
 </Dialog.Root>
@@ -27,14 +28,13 @@
 		<Tooltip.Trigger
 			onclick={() => {
 				dialogOpen = true;
-				dialogImageSrc = `/${section}/portfolio/${idx}.jpg`;
+				dialogImageSrc = `/assets/${section}/portfolio/${idx}.jpg`;
 			}}
 			class="overflow-hidden object-cover {gridCtrl}"
 		>
-			<img
-				loading="lazy"
-				src="/{section}/portfolio/{idx}.jpg"
-				alt=""
+			<Image 
+				url={`/assets/${section}/portfolio/${idx}.jpg`} 
+				description="" 
 				class="h-full w-full object-cover transition-all duration-500 ease-in-out hover:scale-110"
 			/>
 		</Tooltip.Trigger>
