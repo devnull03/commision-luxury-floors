@@ -13,7 +13,7 @@ const config = {
 				domains: ['www.luxuryfloors.ca', 'luxuryfloors.ca', 'commision-luxury-floors.vercel.app'],
 				localPatterns: [
 					{
-						pathname: '/static/assets/**',
+						pathname: '/assets/**',
 						search: '',
 					}
 				]
