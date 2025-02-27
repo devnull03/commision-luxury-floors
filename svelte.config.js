@@ -11,12 +11,6 @@ const config = {
 				formats: ['image/avif', 'image/webp'],
 				minimumCacheTTL: 300,
 				domains: ['www.luxuryfloors.ca', 'luxuryfloors.ca', 'commision-luxury-floors.vercel.app'],
-				localPatterns: [
-					{
-						pathname: '/assets/**',
-						search: '',
-					}
-				]
 			}
 		})
 	}
