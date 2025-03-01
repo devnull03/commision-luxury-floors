@@ -4,14 +4,15 @@
 	interface Props {
 		url: string;
 		description: string;
-		class: string;
+		class?: string;
+		size?: number;
 	}
 
-	let { url, description, class: className }: Props = $props();
+	let { url, description, class: className, size }: Props = $props();
 </script>
 
 <img
 	class={className}
-	srcset={optimize(url)}
+	srcset={size ? optimize(url, [size]) : optimize(url)}
 	alt={description}
 />
