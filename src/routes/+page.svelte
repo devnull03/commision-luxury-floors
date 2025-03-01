@@ -148,7 +148,7 @@
 				description="" 
 				class="w-1/4 object-cover object-left" 
 				size={[640]}
-				quality={50}
+				quality={80}
 			/>
 		{/each}
 
