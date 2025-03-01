@@ -226,6 +226,8 @@
 							url={`/assets/landing/more${i + 1}.jpeg`} 
 							description="" 
 							class="h-full w-full object-cover transition-all duration-500 ease-in-out hover:scale-110" 
+							size={[640]}
+							quality={70}
 						/>
 					</button>
 
