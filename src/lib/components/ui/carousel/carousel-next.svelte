@@ -33,6 +33,7 @@
 	disabled={!$canScrollNext}
 	on:click={scrollNext}
 	on:keydown={handleKeyDown}
+	aria-label="Next slide"
 	{...$$restProps}
 >
 	<ArrowRight class="h-4 w-4" />

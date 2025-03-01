@@ -2,11 +2,9 @@
 	import Instagram from '../icons/Instagram.svelte';
 	import PhoneCall from '../icons/PhoneCall.svelte';
 	import { Button, buttonVariants } from '$lib/components/ui/button';
-	import { gsap } from 'gsap';
 	import { onMount } from 'svelte';
 	import { scrollThreshold } from '$lib/animations.store';
 	import * as Dialog from '$lib/components/ui/dialog';
-	import { Title } from './ui/card';
 	import { Slider } from './ui/slider';
 	import { Input } from './ui/input';
 	import { goto } from '$app/navigation';
@@ -16,6 +14,7 @@
 	import { slide } from 'svelte/transition';
 	import { toast } from 'svelte-sonner';
 	import { PUBLIC_FORM_KEY } from '$env/static/public';
+	import { Cross2, HamburgerMenu } from 'svelte-radix';
 
 	let initScroll = $state(0);
 	let isLandingPage = $derived($page.route.id === '/');
@@ -61,22 +60,24 @@
 				: 'text-[#00000080]'}"
 			id="header-logo-area"
 			onclick={() => goto('/')}
+			aria-label="Go to home page"
 		>
 			Luxry Floors
 		</button>
 
 		<button
-			class="absolute right-4 top-0 px-8 py-10 md:hidden lg:hidden {initScroll < $scrollThreshold &&
+			class="absolute right-4 top-0 px-8 py-10 lg:hidden {initScroll < $scrollThreshold &&
 			isLandingPage
 				? 'text-white'
 				: 'text-black'}"
 			bind:clientWidth={mobileNavButtonWidth}
 			onclick={() => (mobileNavOpen = !mobileNavOpen)}
+			aria-label={mobileNavOpen ? 'Close navigation menu' : 'Open navigation menu'}
 		>
 			{#if mobileNavOpen}
-				<span class="fa fa-times scale-150"></span>
+				<Cross2 />
 			{:else}
-				<span class="fa fa-bars scale-150"></span>
+				<HamburgerMenu />
 			{/if}
 		</button>
 
@@ -89,16 +90,25 @@
 					>Services</a
 				>
 
-				<a href="https://instagram.com" class="text-xs font-semibold uppercase">
+				<a
+					href="https://instagram.com"
+					aria-label="Go to instagram page"
+					class="text-xs font-semibold uppercase"
+				>
 					<Instagram color={colorState ? 'white' : 'black'} />
 				</a>
-				<a href="tel:+1234567890" class="text-xs font-semibold uppercase">
+				<a
+					href="tel:+1234567890"
+					aria-label="Call phone number"
+					class="text-xs font-semibold uppercase"
+				>
 					<PhoneCall color={colorState ? 'white' : 'black'} />
 				</a>
 
 				<Button
 					onclick={() => ($quoteDialogOpen = true)}
-					variant={colorState ? 'secondary' : 'default'}>Get Quote</Button
+					variant={colorState ? 'secondary' : 'default'}
+					aria-label="Open quote request form">Get Quote</Button
 				>
 			</div>
 		{/if}
@@ -118,11 +128,13 @@
 
 				<Button
 					variant={quoteEpoxyType === 'Metalic' ? 'default' : 'secondary'}
-					onclick={() => (quoteEpoxyType = 'Metalic')}>Metalic</Button
+					onclick={() => (quoteEpoxyType = 'Metalic')}
+					aria-label="Select metallic epoxy type">Metalic</Button
 				>
 				<Button
 					variant={quoteEpoxyType === 'Flake' ? 'default' : 'secondary'}
-					onclick={() => (quoteEpoxyType = 'Flake')}>Flake</Button
+					onclick={() => (quoteEpoxyType = 'Flake')}
+					aria-label="Select flake epoxy type">Flake</Button
 				>
 
 				<h6 class="col-span-2 flex items-end">Area of the Floor</h6>
@@ -176,7 +188,7 @@
 				<input type="hidden" name="subject" value="Contact us from - example.com" />
 				<input type="hidden" name="replyTo" value="@" />
 
-				<Button type="submit" class="px-8">Submit</Button>
+				<Button type="submit" class="px-8" aria-label="Submit quote request">Submit</Button>
 			</form>
 		</div>
 	</Dialog.Content>

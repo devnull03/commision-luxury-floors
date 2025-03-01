@@ -164,6 +164,7 @@
 		<Button
 			onclick={() => goto('/gallery')}
 			variant="outline"
+			aria-label="View portfolio"
 			class="absolute bottom-[15%] mt-8 uppercase ">Portfolio</Button
 		>
 	</section>
@@ -215,6 +216,7 @@
 					<button
 						onclick={() => goto(`/services/${services[i]}`)}
 						class=" aspect-square overflow-hidden rounded-3xl object-cover"
+						aria-label={`Learn more about ${point.title}`}
 					>
 						<Image 
 							url={`/assets/landing/more${i + 1}.jpeg`} 

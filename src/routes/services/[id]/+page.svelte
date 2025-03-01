@@ -63,6 +63,7 @@
 						onclick={() => carouselAPI?.scrollTo(idx)}
 						class="-ml-6 cursor-pointer pl-1 first:ml-auto {currentSlide === idx ||
 							'scale-75 lg:scale-90'} transition-all duration-300 ease-in-out"
+						aria-label={`View slide ${idx + 1}`}
 					>
 						<Card.Root class="overflow-hidden !border-black">
 							<Card.Content class="lg:aspect-16/9 aspect-9/16 overflow-hidden object-cover p-0">
@@ -157,6 +158,7 @@
 				target="_blank"
 				href="/assets/{$page.params.id}/pallet/color_scheme.pdf"
 				variant="secondary"
+				aria-label="Download color chart PDF"
 				class="w-min">Download Color Chart</Button
 			>
 		</div>

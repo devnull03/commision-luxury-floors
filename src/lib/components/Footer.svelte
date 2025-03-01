@@ -17,7 +17,7 @@
 		class="flex w-full flex-row justify-between text-[#FFFFFF99] *:*:underline *:*:transition-all *:*:duration-300 *:*:ease-in-out hover:*:*:text-white"
 	>
 		<div class="">
-			<button onclick={() => ($quoteDialogOpen = true)}>Book A Call</button>
+			<button onclick={() => ($quoteDialogOpen = true)} aria-label="Open quote request form">Book A Call</button>
 		</div>
 		<div class="flex gap-2 lg:gap-8">
 			<!-- TODO: add social links -->
@@ -42,6 +42,7 @@
 						$quoteDialogOpen = true;
 					}
 				}}
+				aria-label={item.label === 'FREE QUOTES' ? 'Open quote request form' : `Go to ${item.label.toLowerCase()} page`}
 				class="whitespace-normal break-keep font-[Cantarell] text-sm font-bold text-white hover:text-[#FFFFFF99] lg:text-lg"
 			>
 				{item.label}

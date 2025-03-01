@@ -33,6 +33,7 @@
 	disabled={!$canScrollPrev}
 	on:click={scrollPrev}
 	on:keydown={handleKeyDown}
+	aria-label="Previous slide"
 	{...$$restProps}
 >
 	<ArrowLeft class="h-4 w-4" />
