@@ -147,7 +147,8 @@
 				url={`/assets/landing/floor${i + 1}.png`} 
 				description="" 
 				class="w-1/4 object-cover object-left" 
-				size={640}
+				size={[640]}
+				quality={50}
 			/>
 		{/each}
 
@@ -181,7 +182,8 @@
 						url="/assets/landing/tiles.jpeg" 
 						description="" 
 						class="object-cover transition-all duration-500 ease-in-out hover:scale-110"
-						size={640}
+						size={[640]}
+						quality={70}
 					/>
 				</div>
 			</div>

@@ -5,14 +5,15 @@
 		url: string;
 		description: string;
 		class?: string;
-		size?: number;
+		size?: number[];
+		quality?: number;
 	}
 
-	let { url, description, class: className, size }: Props = $props();
+	let { url, description, class: className, size=[640, 828, 1200], quality = 90 }: Props = $props();
 </script>
 
 <img
 	class={className}
-	srcset={size ? optimize(url, [size]) : optimize(url)}
+	srcset={optimize(url, size, quality)}
 	alt={description}
 />
