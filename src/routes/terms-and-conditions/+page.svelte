@@ -1,12 +1,13 @@
 <script lang="ts">
 	import Image from '$lib/components/Image.svelte';
+	import Logo from '$lib/icons/Logo.svelte';
 </script>
 
 <main class="mt-24 lg:mt-16">
 	<!-- landing -->
 	<section class="flex flex-col items-center justify-center gap-16 bg-black py-28 lg:flex-row">
 		<div class="foot-logo aspect-square h-[25vh]">
-			<Image url="/assets/logo.png" description="Big logo" class="w-full h-auto" />
+			<Logo class="h-auto w-full" />
 		</div>
 
 		<div class="text-center text-3xl font-semibold text-white lg:text-4xl">
@@ -14,7 +15,7 @@
 		</div>
 	</section>
 
-	<section class="lg:p-28 p-10 font-[Cantarell] leading-10">
+	<section class="p-10 font-[Cantarell] leading-10 lg:p-28">
 		<h3>Warranty Coverage</h3>
 		This warranty covers the following:
 		<ol>

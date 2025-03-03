@@ -2,6 +2,7 @@
 	import { PUBLIC_COMPANY_NAME, PUBLIC_DOMAIN } from '$env/static/public';
 	import { quoteDialogOpen } from '$lib/stores.svelte';
 	import Image from '$lib/components/Image.svelte';
+	import Logo from '$lib/icons/Logo.svelte';
 
 	const menuItems = [
 		{ label: 'SERVICES', route: '/?services' },
@@ -29,7 +30,7 @@
 	</div>
 
 	<div class="foot-logo aspect-square h-[40vh] overflow-hidden">
-		<Image url="/assets/logo.png" description="Big logo" class="aspect-square h-[40vh] w-auto" />
+		 <Logo class="aspect-square h-[40vh] w-auto" />
 	</div>
 
 	<div

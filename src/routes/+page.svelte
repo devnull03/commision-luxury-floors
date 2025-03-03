@@ -8,9 +8,10 @@
 	import { fade } from 'svelte/transition';
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
-	import { isMobile, services } from '$lib/stores.svelte';
+	import { isMobile, services, servicesPageNavigating } from '$lib/stores.svelte';
 	import Image from '$lib/components/Image.svelte';
 	import { optimize } from '$lib/image';
+	import Logo from '$lib/icons/Logo.svelte';
 
 	let initScroll = $state(0);
 	let tweenInstance: gsap.core.Tween;
@@ -110,12 +111,6 @@
 		}
 	];
 
-	let bigLogoProps = {
-		url: '/assets/logo.png',
-		size: [640],
-		quality: 90
-	};
-
 	onMount(() => {
 		tweenInstance = gsap.to('#logo', {
 			duration: 0.3,
@@ -132,35 +127,27 @@
 			ease: 'power2.inOut',
 			paused: initScroll < $scrollThreshold
 		});
-
-		if ($page.url.searchParams.has('services') && servicesSection) {
+		if ($page.url.toString().includes('services')) {
 			servicesSection.scrollIntoView({ behavior: 'smooth' });
+			handleScroll();
+		}
+	});
+
+	$effect(() => {
+		if ($servicesPageNavigating || $page.url.toString().includes('services')) {
+			handleScroll();
+			$servicesPageNavigating = false;
+			console.log('services page navigating');
+			
 		}
 	});
 </script>
 
 <svelte:window onscroll={handleScroll} bind:scrollY={initScroll} />
 
-<svelte:head>
-	<link
-		rel="preload"
-		fetchpriority="high"
-		as="image"
-		href={optimize(bigLogoProps.url, bigLogoProps.size, bigLogoProps.quality)}
-		type="image/webp"
-	/>
-</svelte:head>
-
 <main class="flex w-screen flex-col items-center gap-16 pb-48 lg:gap-8">
 	<div id="logo" class="fixed top-[12vh] z-10 aspect-square h-[50vh] w-[50vh]">
-		<Image
-			{...bigLogoProps}
-			description="Big logo"
-			class="h-full w-full"
-			width="50vh"
-			height="50vh"
-			fetchpriority="high"
-		/>
+		<Logo class="h-full w-full" width="50vh" height="50vh" />
 	</div>
 
 	<!-- landing screen -->
@@ -249,7 +236,7 @@
 						<Image
 							url={`/assets/landing/more${i + 1}.jpeg`}
 							description=""
-							class="h-auto w-full aspect-square object-cover transition-all duration-500 ease-in-out hover:scale-110"
+							class="aspect-square h-auto w-full object-cover transition-all duration-500 ease-in-out hover:scale-110"
 							size={[480]}
 							width="480"
 							quality={50}

@@ -10,11 +10,12 @@
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
 	import Image from '$lib/components/Image.svelte';
-	import { isMobile, quoteDialogOpen } from '$lib/stores.svelte';
+	import { isMobile, quoteDialogOpen, servicesPageNavigating } from '$lib/stores.svelte';
 	import { slide } from 'svelte/transition';
 	import { toast } from 'svelte-sonner';
 	import { PUBLIC_FORM_KEY } from '$env/static/public';
 	import { Cross2, HamburgerMenu } from 'svelte-radix';
+	import Logo from '$lib/icons/Logo.svelte';
 
 	let initScroll = $state(0);
 	let isLandingPage = $derived($page.route.id === '/');
@@ -48,7 +49,7 @@
 <nav class="realtive">
 	{#if !isLandingPage}
 		<div class="fixed left-[6%] top-4 z-[55] aspect-square h-16 w-16 invert">
-			<Image url="/assets/logo.png" description="Big logo" class="h-16 w-16" size={[480]} quality={50} />
+			<Logo class="h-full w-full" />
 		</div>
 	{/if}
 
@@ -91,8 +92,10 @@
 				in:slide
 				class="absolute top-24 z-[999] -mx-[6%] flex w-screen flex-col items-center justify-evenly gap-8 border-b border-black bg-white py-4 lg:relative lg:top-0 lg:mx-0 lg:w-auto lg:flex-row lg:border-transparent lg:bg-transparent lg:py-0"
 			>
-				<a href="/#services" class="{colorState ? 'text-white' : 'text-black'} font-semibold"
-					>Services</a
+				<a
+					href="/#services"
+					onclick={() => ($servicesPageNavigating = true)}
+					class="{colorState ? 'text-white' : 'text-black'} font-semibold">Services</a
 				>
 
 				<a
