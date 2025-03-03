@@ -28,6 +28,7 @@
 
 	let mobileNavButtonWidth: number = $state(0);
 	let mobileNavOpen = $state(false);
+	let firstLoad = $state(true);
 
 	$effect(() => {
 		$isMobile = mobileNavButtonWidth !== 0;
@@ -35,7 +36,11 @@
 
 	let colorState = $derived(!$isMobile ? initScroll < $scrollThreshold && isLandingPage : false);
 
-	onMount(() => {});
+	onMount(() => {
+		// setTimeout(() => {
+		firstLoad = false;
+		// }, 10);
+	});
 </script>
 
 <svelte:window bind:scrollY={initScroll} />
@@ -81,7 +86,7 @@
 			{/if}
 		</button>
 
-		{#if !$isMobile || mobileNavOpen}
+		{#if (!firstLoad && !$isMobile) || mobileNavOpen}
 			<div
 				in:slide
 				class="absolute top-24 z-[999] -mx-[6%] flex w-screen flex-col items-center justify-evenly gap-8 border-b border-black bg-white py-4 lg:relative lg:top-0 lg:mx-0 lg:w-auto lg:flex-row lg:border-transparent lg:bg-transparent lg:py-0"
@@ -115,81 +120,83 @@
 	</div>
 </nav>
 
-<Dialog.Root bind:open={$quoteDialogOpen}>
-	<Dialog.Content class="lg:max-w-[60vw]">
-		<Dialog.Header>
-			<Dialog.Title class="text-center text-2xl font-semibold">Quote</Dialog.Title>
-		</Dialog.Header>
+{#if $quoteDialogOpen}
+	<Dialog.Root bind:open={$quoteDialogOpen}>
+		<Dialog.Content class="lg:max-w-[60vw]">
+			<Dialog.Header>
+				<Dialog.Title class="text-center text-2xl font-semibold">Quote</Dialog.Title>
+			</Dialog.Header>
 
-		<div class="flex w-full flex-col items-center justify-evenly lg:flex-row">
-			<!-- quote calculator -->
-			<div class="grid h-full w-full grid-cols-2 grid-rows-6 gap-4 p-8 font-semibold lg:w-1/2">
-				<h6 class="col-span-2 flex items-end">Type of Epoxy</h6>
+			<div class="flex w-full flex-col items-center justify-evenly lg:flex-row">
+				<!-- quote calculator -->
+				<div class="grid h-full w-full grid-cols-2 grid-rows-6 gap-4 p-8 font-semibold lg:w-1/2">
+					<h6 class="col-span-2 flex items-end">Type of Epoxy</h6>
 
-				<Button
-					variant={quoteEpoxyType === 'Metalic' ? 'default' : 'secondary'}
-					onclick={() => (quoteEpoxyType = 'Metalic')}
-					aria-label="Select metallic epoxy type">Metalic</Button
+					<Button
+						variant={quoteEpoxyType === 'Metalic' ? 'default' : 'secondary'}
+						onclick={() => (quoteEpoxyType = 'Metalic')}
+						aria-label="Select metallic epoxy type">Metalic</Button
+					>
+					<Button
+						variant={quoteEpoxyType === 'Flake' ? 'default' : 'secondary'}
+						onclick={() => (quoteEpoxyType = 'Flake')}
+						aria-label="Select flake epoxy type">Flake</Button
+					>
+
+					<h6 class="col-span-2 flex items-end">Area of the Floor</h6>
+
+					<Slider class="col-span-2" bind:value={quoteArea} max={5000} />
+
+					&nbsp;
+
+					<span class="flex items-center justify-center">{quoteArea} sqft</span>
+
+					<span class="col-span-2 {buttonVariants({ variant: 'default' })}"
+						>From: ${quoteTotal()}</span
+					>
+				</div>
+
+				<!-- divider -->
+				<div class="h-0.5 w-[60%] rounded-lg bg-black lg:h-[60%] lg:w-0.5">&nbsp;</div>
+
+				<!-- custom quote -->
+				<form
+					method="POST"
+					action="https://api.staticforms.xyz/submit"
+					class="flex h-full w-full flex-col items-center justify-center gap-4 *:max-w-[70%] lg:w-1/2"
+					onsubmit={(e) => {
+						e.preventDefault();
+						const form = e.currentTarget;
+						const formData = new FormData(form);
+
+						fetch('https://api.staticforms.xyz/submit', {
+							method: 'POST',
+							body: formData
+						})
+							.then((response) => response.json())
+							.then((data) => {
+								if (data.success) {
+									toast.success('Message sent successfully!');
+								} else {
+									console.log(data);
+									toast.error(`Message failed to send! [error: ${data.message}]`);
+								}
+							});
+					}}
 				>
-				<Button
-					variant={quoteEpoxyType === 'Flake' ? 'default' : 'secondary'}
-					onclick={() => (quoteEpoxyType = 'Flake')}
-					aria-label="Select flake epoxy type">Flake</Button
-				>
+					<h6 class="flex items-end text-lg font-semibold">Custom Design</h6>
+					<Input type="text" placeholder="Name" name="name" />
+					<Input type="phone" placeholder="Phone" name="phone" />
+					<Input type="email" placeholder="Email" name="email" />
 
-				<h6 class="col-span-2 flex items-end">Area of the Floor</h6>
+					<input type="text" name="honeypot" style="display:none" />
+					<input type="hidden" name="accessKey" value={PUBLIC_FORM_KEY} />
+					<input type="hidden" name="subject" value="Contact us from - example.com" />
+					<input type="hidden" name="replyTo" value="@" />
 
-				<Slider class="col-span-2" bind:value={quoteArea} max={5000} />
-
-				&nbsp;
-
-				<span class="flex items-center justify-center">{quoteArea} sqft</span>
-
-				<span class="col-span-2 {buttonVariants({ variant: 'default' })}"
-					>From: ${quoteTotal()}</span
-				>
+					<Button type="submit" class="px-8" aria-label="Submit quote request">Submit</Button>
+				</form>
 			</div>
-
-			<!-- divider -->
-			<div class="h-0.5 w-[60%] rounded-lg bg-black lg:h-[60%] lg:w-0.5">&nbsp;</div>
-
-			<!-- custom quote -->
-			<form
-				method="POST"
-				action="https://api.staticforms.xyz/submit"
-				class="flex h-full w-full flex-col items-center justify-center gap-4 *:max-w-[70%] lg:w-1/2"
-				onsubmit={(e) => {
-					e.preventDefault();
-					const form = e.currentTarget;
-					const formData = new FormData(form);
-
-					fetch('https://api.staticforms.xyz/submit', {
-						method: 'POST',
-						body: formData
-					})
-						.then((response) => response.json())
-						.then((data) => {
-							if (data.success) {
-								toast.success('Message sent successfully!');
-							} else {
-								console.log(data);
-								toast.error(`Message failed to send! [error: ${data.message}]`);
-							}
-						});
-				}}
-			>
-				<h6 class="flex items-end text-lg font-semibold">Custom Design</h6>
-				<Input type="text" placeholder="Name" name="name" />
-				<Input type="phone" placeholder="Phone" name="phone" />
-				<Input type="email" placeholder="Email" name="email" />
-
-				<input type="text" name="honeypot" style="display:none" />
-				<input type="hidden" name="accessKey" value={PUBLIC_FORM_KEY} />
-				<input type="hidden" name="subject" value="Contact us from - example.com" />
-				<input type="hidden" name="replyTo" value="@" />
-
-				<Button type="submit" class="px-8" aria-label="Submit quote request">Submit</Button>
-			</form>
-		</div>
-	</Dialog.Content>
-</Dialog.Root>
+		</Dialog.Content>
+	</Dialog.Root>
+{/if}
