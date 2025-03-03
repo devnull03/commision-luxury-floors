@@ -43,7 +43,7 @@
 <nav class="realtive">
 	{#if !isLandingPage}
 		<div class="fixed left-[6%] top-4 z-[55] aspect-square h-16 w-16 invert">
-			<Image url="/assets/logo.png" description="Big logo" class="w-full h-auto" />
+			<Image url="/assets/logo.png" description="Big logo" class="h-auto w-full" />
 		</div>
 	{/if}
 
@@ -83,7 +83,7 @@
 
 		{#if !$isMobile || mobileNavOpen}
 			<div
-				transition:slide
+				in:slide
 				class="absolute top-24 z-[999] -mx-[6%] flex w-screen flex-col items-center justify-evenly gap-8 border-b border-black bg-white py-4 lg:relative lg:top-0 lg:mx-0 lg:w-auto lg:flex-row lg:border-transparent lg:bg-transparent lg:py-0"
 			>
 				<a href="/?services" class="{colorState ? 'text-white' : 'text-black'} font-semibold"
