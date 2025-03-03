@@ -136,7 +136,7 @@
 
 <main class="flex w-screen flex-col items-center gap-16 lg:gap-8 pb-48">
 	<div id="logo" class="fixed top-[12vh] z-10 aspect-square h-[50vh] w-[50vh]">
-		 <Image url="/assets/logo.png" description="Big logo" class="w-full h-auto" />
+		 <Image url="/assets/logo.png" description="Big logo" class="w-full h-auto" size={[480]} />
 	</div>
 
 	<!-- landing screen -->
@@ -146,8 +146,8 @@
 				url={`/assets/landing/floor${i + 1}.png`} 
 				description="" 
 				class="w-1/4 object-cover object-left h-[80vh]" 
-				size={[640]}
-				quality={80}
+				size={[480]}
+				quality={90}
 			/>
 		{/each}
 
