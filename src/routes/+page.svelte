@@ -112,7 +112,7 @@
 
 	let bigLogoProps = {
 		url: '/assets/logo.png',
-		size: [480],
+		size: [640],
 		quality: 90
 	};
 
@@ -243,15 +243,16 @@
 				<div class="flex flex-col items-center gap-4 text-center">
 					<button
 						onclick={() => goto(`/services/${services[i]}`)}
-						class=" aspect-square overflow-hidden rounded-3xl object-cover"
+						class="aspect-square overflow-hidden rounded-3xl object-cover"
 						aria-label={`Learn more about ${point.title}`}
 					>
 						<Image
 							url={`/assets/landing/more${i + 1}.jpeg`}
 							description=""
-							class="h-full w-full object-cover transition-all duration-500 ease-in-out hover:scale-110"
-							size={[640]}
-							quality={70}
+							class="h-auto w-full aspect-square object-cover transition-all duration-500 ease-in-out hover:scale-110"
+							size={[480]}
+							width="480"
+							quality={50}
 						/>
 					</button>
 
