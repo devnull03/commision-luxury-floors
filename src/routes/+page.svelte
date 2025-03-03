@@ -10,6 +10,7 @@
 	import { page } from '$app/stores';
 	import { isMobile, services } from '$lib/stores.svelte';
 	import Image from '$lib/components/Image.svelte';
+	import { optimize } from '$lib/image';
 
 	let initScroll = $state(0);
 	let tweenInstance: gsap.core.Tween;
@@ -109,6 +110,12 @@
 		}
 	];
 
+	let bigLogoProps = {
+		url: '/assets/logo.png',
+		size: [480],
+		quality: 90
+	};
+
 	onMount(() => {
 		tweenInstance = gsap.to('#logo', {
 			duration: 0.3,
@@ -134,20 +141,38 @@
 
 <svelte:window onscroll={handleScroll} bind:scrollY={initScroll} />
 
-<main class="flex w-screen flex-col items-center gap-16 lg:gap-8 pb-48">
+<svelte:head>
+	<link
+		rel="preload"
+		fetchpriority="high"
+		as="image"
+		href={optimize(bigLogoProps.url, bigLogoProps.size, bigLogoProps.quality)}
+		type="image/webp"
+	/>
+</svelte:head>
+
+<main class="flex w-screen flex-col items-center gap-16 pb-48 lg:gap-8">
 	<div id="logo" class="fixed top-[12vh] z-10 aspect-square h-[50vh] w-[50vh]">
-		 <Image url="/assets/logo.png" description="Big logo" class="w-full h-auto" size={[480]} />
+		<Image
+			{...bigLogoProps}
+			description="Big logo"
+			class="h-full w-full"
+			width="50vh"
+			height="50vh"
+			fetchpriority="high"
+		/>
 	</div>
 
 	<!-- landing screen -->
 	<section class="relative flex h-[80vh] w-full flex-row justify-evenly gap-0">
 		{#each Array(4) as _, i}
-			<Image 
-				url={`/assets/landing/floor${i + 1}.png`} 
-				description="" 
-				class="w-1/4 object-cover object-left h-[80vh]" 
+			<Image
+				url={`/assets/landing/floor${i + 1}.png`}
+				description=""
+				class="h-[80vh] w-1/4 object-cover object-left"
 				size={[480]}
-				quality={90}
+				quality={i === 3 ? 50 : 80}
+				fetchpriority="high"
 			/>
 		{/each}
 
@@ -177,10 +202,10 @@
 		<div class="grid w-full grid-flow-row-dense grid-cols-6 grid-rows-3 gap-10">
 			<div class="col-span-6 flex w-full items-center justify-center">
 				<div class="overflow-hidden rounded-3xl lg:w-1/2">
-					<Image 
-						url="/assets/landing/tiles.jpeg" 
-						description="" 
-						class="object-cover transition-all duration-500 ease-in-out hover:scale-110 w-full"
+					<Image
+						url="/assets/landing/tiles.jpeg"
+						description=""
+						class="aspect-video h-auto w-full object-cover transition-all duration-500 ease-in-out hover:scale-110"
 						size={[640]}
 						quality={70}
 					/>
@@ -207,13 +232,13 @@
 
 	<!-- services -->
 	<section
-		class="flex scroll-mt-32 flex-col items-center gap-12 lg:gap-16 px-[6%] pb-16"
+		class="flex scroll-mt-32 flex-col items-center gap-12 px-[6%] pb-16 lg:gap-16"
 		id="services"
 		bind:this={servicesSection}
 	>
 		<h1 class="text-center text-4xl font-semibold leading-10">Services</h1>
 
-		<div class="grid w-full lg:grid-cols-3 gap-10">
+		<div class="grid w-full gap-10 lg:grid-cols-3">
 			{#each knowMorePoints as point, i}
 				<div class="flex flex-col items-center gap-4 text-center">
 					<button
@@ -221,10 +246,10 @@
 						class=" aspect-square overflow-hidden rounded-3xl object-cover"
 						aria-label={`Learn more about ${point.title}`}
 					>
-						<Image 
-							url={`/assets/landing/more${i + 1}.jpeg`} 
-							description="" 
-							class="h-full w-full object-cover transition-all duration-500 ease-in-out hover:scale-110" 
+						<Image
+							url={`/assets/landing/more${i + 1}.jpeg`}
+							description=""
+							class="h-full w-full object-cover transition-all duration-500 ease-in-out hover:scale-110"
 							size={[640]}
 							quality={70}
 						/>
@@ -243,23 +268,19 @@
 	</section>
 
 	<!-- testimonials -->
-	<section class="flex w-full flex-col gap-12 lg:gap-16 pb-16 text-center">
+	<section class="flex w-full flex-col gap-12 pb-16 text-center lg:gap-16">
 		<h1 class="text-center text-4xl font-semibold leading-10">Testimonials</h1>
 
 		<ScrollArea orientation="horizontal" class="w-full">
 			<div class="flex flex-row gap-8 px-[30vw] pb-4">
 				{#each testimonials as item, idx (idx)}
-					<Card.Root class="min-h-[65vh] w-[80vw] lg:w-[30vw] bg-black">
+					<Card.Root class="min-h-[65vh] w-[80vw] bg-black lg:w-[30vw]">
 						<Card.Header>
-							<Image 
-								url="/assets/quote.png" 
-								description="" 
-								class="aspect-square w-16" 
-							/>
+							<Image url="/assets/quote.png" description="" class="aspect-square w-16" />
 						</Card.Header>
 						<Card.Content>
 							<!-- <ScrollArea> -->
-							<div class="text-left lg:text-xl font-semibold text-[#FFFFFFCC]">
+							<div class="text-left font-semibold text-[#FFFFFFCC] lg:text-xl">
 								{item.testimonial}
 								<br />
 								<span class="text-[#C7A865]">{item.author}</span>

@@ -48,7 +48,7 @@
 <nav class="realtive">
 	{#if !isLandingPage}
 		<div class="fixed left-[6%] top-4 z-[55] aspect-square h-16 w-16 invert">
-			<Image url="/assets/logo.png" description="Big logo" class="h-auto w-full" />
+			<Image url="/assets/logo.png" description="Big logo" class="h-16 w-16" size={[480]} quality={50} />
 		</div>
 	{/if}
 
