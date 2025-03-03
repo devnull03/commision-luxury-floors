@@ -91,7 +91,7 @@
 				in:slide
 				class="absolute top-24 z-[999] -mx-[6%] flex w-screen flex-col items-center justify-evenly gap-8 border-b border-black bg-white py-4 lg:relative lg:top-0 lg:mx-0 lg:w-auto lg:flex-row lg:border-transparent lg:bg-transparent lg:py-0"
 			>
-				<a href="/?services" class="{colorState ? 'text-white' : 'text-black'} font-semibold"
+				<a href="/#services" class="{colorState ? 'text-white' : 'text-black'} font-semibold"
 					>Services</a
 				>
 
