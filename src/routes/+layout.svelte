@@ -20,15 +20,15 @@
 	let scrollY = $state(0);
 	let { children }: Props = $props();
 
-	let firstLoad = $state(true);
-	let load = $derived(firstLoad || !$navigating);
+	// let firstLoad = $state(true);
+	// let load = $derived(firstLoad || !$navigating);
 
 	injectAnalytics({ mode: dev ? 'development' : 'production' });
 	injectSpeedInsights();
 
-	onMount(() => {
-		firstLoad = false;
-	});
+	// onMount(() => {
+	// 	firstLoad = false;
+	// });
 </script>
 
 <svelte:head>
@@ -70,15 +70,15 @@
 
 <Toaster />
 
-{#key load}
-	<div in:fade={{ duration: 400 }} class="flex h-screen flex-col justify-between">
-		<Header />
-		<main class="">
-			{@render children?.()}
-		</main>
-		<Footer />
-	</div>
-{/key}
+<!-- {#key load} -->
+<div class="flex h-screen flex-col justify-between">
+	<Header />
+	<main class="">
+		{@render children?.()}
+	</main>
+	<Footer />
+</div>
+<!-- {/key} -->
 
 {#if scrollY !== 0}
 	<button
