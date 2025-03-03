@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { PUBLIC_COMPANY_NAME, PUBLIC_DOMAIN } from '$env/static/public';
-	import Logo from '$lib/icons/logo.svelte';
 	import { quoteDialogOpen } from '$lib/stores.svelte';
+	import Image from '$lib/components/Image.svelte';
 
 	const menuItems = [
 		{ label: 'SERVICES', route: '/?services' },
@@ -21,13 +21,13 @@
 		</div>
 		<div class="flex gap-2 lg:gap-8">
 			<!-- TODO: add social links -->
-			<a href="">Instagram</a>
-			<a href="">TikTok</a>
+			<a href="https://www.instagram.com/luxuryfloors.ca/">Instagram</a>
+			<!-- <a href="https://www.tiktok.com/@luxuryfloors.ca">TikTok</a> -->
 		</div>
 	</div>
 
 	<div class="foot-logo aspect-square h-[40vh] overflow-hidden">
-		<Logo />
+		<Image url="/assets/logo.png" description="Big logo" class="w-full h-auto" />
 	</div>
 
 	<div

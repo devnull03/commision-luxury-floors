@@ -9,7 +9,7 @@
 	import { Input } from './ui/input';
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
-	import Logo from '../icons/logo.svelte';
+	import Image from '$lib/components/Image.svelte';
 	import { isMobile, quoteDialogOpen } from '$lib/stores.svelte';
 	import { slide } from 'svelte/transition';
 	import { toast } from 'svelte-sonner';
@@ -43,7 +43,7 @@
 <nav class="realtive">
 	{#if !isLandingPage}
 		<div class="fixed left-[6%] top-4 z-[55] aspect-square h-16 w-16 invert">
-			<Logo />
+			<Image url="/assets/logo.png" description="Big logo" class="w-full h-auto" />
 		</div>
 	{/if}
 
@@ -91,14 +91,14 @@
 				>
 
 				<a
-					href="https://instagram.com"
+					href="https://www.instagram.com/luxuryfloors.ca/"
 					aria-label="Go to instagram page"
 					class="text-xs font-semibold uppercase"
 				>
 					<Instagram color={colorState ? 'white' : 'black'} />
 				</a>
 				<a
-					href="tel:+1234567890"
+					href="tel:7783085911"
 					aria-label="Call phone number"
 					class="text-xs font-semibold uppercase"
 				>

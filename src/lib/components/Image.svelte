@@ -9,7 +9,7 @@
 		quality?: number;
 	}
 
-	let { url, description, class: className, size=[640, 828, 1200], quality = 90 }: Props = $props();
+	let { url, description, class: className = "", size=[640, 828, 1200], quality = 90 }: Props = $props();
 </script>
 
 <img

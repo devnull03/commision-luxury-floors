@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import { gsap } from 'gsap';
-	import Logo from '$lib/icons/logo.svelte';
 	import Button from '$lib/components/ui/button/button.svelte';
 	import { scrollThreshold } from '$lib/animations.store';
 	import { ScrollArea } from '$lib/components/ui/scroll-area';
@@ -137,7 +136,7 @@
 
 <main class="flex w-screen flex-col items-center gap-16 lg:gap-8 pb-48">
 	<div id="logo" class="fixed top-[12vh] z-10 aspect-square h-[50vh] w-[50vh]">
-		<Logo />
+		 <Image url="/assets/logo.png" description="Big logo" class="w-full h-auto" />
 	</div>
 
 	<!-- landing screen -->

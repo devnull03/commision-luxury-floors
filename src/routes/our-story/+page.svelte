@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Logo from '$lib/icons/logo.svelte';
+	import Image from '$lib/components/Image.svelte';
 </script>
 
 <main class="lg:mt-16 mt-24">
@@ -7,7 +7,7 @@
 	<section class="flex flex-col items-center justify-center gap-16 bg-black px-10 lg:px-36 py-28">
 		<div class="text-center font-[Cantarell] text-white">
 			<div class="foot-logo aspect-square h-[40vh]">
-				<Logo />
+				<Image url="/assets/logo.png" description="Big logo" class="w-full h-auto" />
 			</div>
 			<h4 class="text-xl font-semibold">Luxury Floors</h4>
 		</div>
