@@ -47,6 +47,9 @@
 	<meta name="author" content="Luxury Floors Inc." />
 	<meta name="geo.placename" content="British Columbia, Canada" />
 	<meta name="geo.region" content="CA-BC" />
+	
+	<!-- SEO: Robots and Sitemap -->
+	<link rel="sitemap" type="application/xml" href="/sitemap.xml" />
 </svelte:head>
 
 <svelte:window bind:scrollY />
